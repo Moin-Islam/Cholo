@@ -68,7 +68,7 @@ class _ComponentState extends State<Component> {
 
 
   Widget buildGetStartedButton() {
-    return  RaisedButton(
+    return  ElevatedButton(
         elevation: 5,
         onPressed:() {} ,
         padding: EdgeInsets.all(15),
@@ -133,7 +133,7 @@ class _ComponentState extends State<Component> {
 
   Widget buildForgetPasswordLogin () {
     return Column(children: [
-      FlatButton(
+      TextButton(
               onPressed: () {},
              
               padding: EdgeInsets.only(right: 0),
@@ -147,7 +147,7 @@ class _ComponentState extends State<Component> {
   }
 
   Widget buildLetsCombatButtonLogin() {
-    return  RaisedButton(
+    return  ElevatedButton(
         elevation: 5,
         onPressed:() {} ,
         padding: EdgeInsets.all(15),
@@ -166,7 +166,7 @@ class _ComponentState extends State<Component> {
 
   Widget buildCreateAccountLogin () {
     return 
-      FlatButton(
+      TextButton(
               onPressed: () {}, 
               padding: EdgeInsets.only(right: 0),
               child: Text(
@@ -199,7 +199,7 @@ class _ComponentState extends State<Component> {
 
   Widget buildExistingAccountSignUp1 () {
     return
-      FlatButton(
+      TextButton(
               onPressed: () {
                 
               },
@@ -214,7 +214,7 @@ class _ComponentState extends State<Component> {
   }
 
   Widget buildNextButton () {
-    return RaisedButton(
+    return ElevatedButton(
         elevation: 5,
         onPressed:() {} ,
         padding: EdgeInsets.all(15),
@@ -249,7 +249,7 @@ class _ComponentState extends State<Component> {
 
   Widget buildResendCodeSignUp3 () {
     return 
-      FlatButton(
+      TextButton(
               onPressed: () {
                 
               },
@@ -720,7 +720,7 @@ class _ComponentState extends State<Component> {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10),
       width: double.infinity,
-      child: RaisedButton(
+      child: ElevatedButton(
           onPressed: () => captureImage(),
           padding: EdgeInsets.all(15),
           shape:
