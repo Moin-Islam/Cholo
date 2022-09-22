@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 
 class Component extends StatefulWidget {
@@ -16,6 +18,8 @@ class Component extends StatefulWidget {
 }
 
 class _ComponentState extends State<Component> {
+
+  late File image;
 
   TextEditingController emailControllerLogin = TextEditingController();
   TextEditingController passwordControllerLogin = TextEditingController();
@@ -64,14 +68,9 @@ class _ComponentState extends State<Component> {
 
 
   Widget buildGetStartedButton() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 25),
-      width: double.infinity,
-      height: 58,
-      margin: EdgeInsets.symmetric(horizontal: 50),
-      child: RaisedButton(
+    return  RaisedButton(
         elevation: 5,
-        onPressed:print("aaa") ,
+        onPressed:() {} ,
         padding: EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         color: Color(0xffEB5757),
@@ -82,22 +81,12 @@ class _ComponentState extends State<Component> {
                     fontSize: 15,
                     fontWeight: FontWeight.normal),
               ),
-      ),
-    );
+      );
+    
   }
 
-  Widget buildEmailLogin() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xffF4F6F8),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 48,
-          child: TextFormField(
+  Widget buildEmailLogin() { 
+    return  TextFormField(
             controller: emailControllerLogin,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
@@ -116,24 +105,12 @@ class _ComponentState extends State<Component> {
                 ),
                 hintText: 'Email',
                 hintStyle: TextStyle(color: Colors.black38)),
-          ),
-        )
-      ],
-    );
+          );
+       
   }
 
   Widget buildPasswordLogin() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xffF4F6F8),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 48,
-          child: TextFormField(
+    return  TextFormField(
             controller: passwordControllerLogin,
             obscureText: true,
             style: TextStyle(color: Colors.black),
@@ -150,21 +127,15 @@ class _ComponentState extends State<Component> {
                 ),
                 hintText: 'password',
                 hintStyle: TextStyle(color: Colors.black38)),
-          ),
-        )
-      ],
-    );
+          );
+        
   }
 
   Widget buildForgetPasswordLogin () {
     return Column(children: [
       FlatButton(
-              onPressed: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>  ),
-                    (Route<dynamic> route) => false);
-              },
+              onPressed: () {},
+             
               padding: EdgeInsets.only(right: 0),
               child: Text(
                 'Forgot your Password?',
@@ -176,13 +147,9 @@ class _ComponentState extends State<Component> {
   }
 
   Widget buildLetsCombatButtonLogin() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 25),
-      width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 50),
-      child: RaisedButton(
+    return  RaisedButton(
         elevation: 5,
-        onPressed:print("aaa") ,
+        onPressed:() {} ,
         padding: EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         color: Color(0xffEB5757),
@@ -193,41 +160,26 @@ class _ComponentState extends State<Component> {
                     fontSize: 15,
                     fontWeight: FontWeight.normal),
               ),
-      ),
-    );
+      );
+    
   }
 
   Widget buildCreateAccountLogin () {
-    return Column(children: [
+    return 
       FlatButton(
-              onPressed: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>  ),
-                    (Route<dynamic> route) => false);
-              },
+              onPressed: () {}, 
               padding: EdgeInsets.only(right: 0),
               child: Text(
                 'Create Account',
                 style: TextStyle(
                     color: Colors.black45, fontWeight: FontWeight.normal),
               ),
-            )
-    ],);
+            );
+    
   }
 
   Widget EnterPhoneNumberSignup1 () {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xffF4F6F8),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 48,
-          child: TextFormField(
+    return TextFormField(
             controller: mobilenumberControllerSignUp1,
             keyboardType: TextInputType.phone,
             style: TextStyle(
@@ -242,19 +194,14 @@ class _ComponentState extends State<Component> {
                 ),
                 
           ),
-        ),)
-      ],
-    );
+        );
   }
 
   Widget buildExistingAccountSignUp1 () {
-    return Column(children: [
+    return
       FlatButton(
               onPressed: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>  ),
-                    (Route<dynamic> route) => false);
+                
               },
               padding: EdgeInsets.only(right: 0),
               child: Text(
@@ -262,18 +209,14 @@ class _ComponentState extends State<Component> {
                 style: TextStyle(
                     color: Colors.black45, fontWeight: FontWeight.normal),
               ),
-            )
-    ],);
+            );
+    
   }
 
   Widget buildNextButton () {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 25),
-      width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 50),
-      child: RaisedButton(
+    return RaisedButton(
         elevation: 5,
-        onPressed:print("aaa") ,
+        onPressed:() {} ,
         padding: EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         color: Color(0xffEB5757),
@@ -284,8 +227,8 @@ class _ComponentState extends State<Component> {
                     fontSize: 15,
                     fontWeight: FontWeight.normal),
               ),
-      ),
-    );
+      );
+    
   }
   
   Widget buildOTPfieldSignUp3 () {
@@ -305,13 +248,10 @@ class _ComponentState extends State<Component> {
   }
 
   Widget buildResendCodeSignUp3 () {
-    return Column(children: [
+    return 
       FlatButton(
               onPressed: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>  ),
-                    (Route<dynamic> route) => false);
+                
               },
               padding: EdgeInsets.only(right: 0),
               child: Text(
@@ -319,8 +259,8 @@ class _ComponentState extends State<Component> {
                 style: TextStyle(
                     color: Color(0xffEB5757), fontWeight: FontWeight.normal),
               ),
-            )
-    ],);
+            );
+   
   }
 
   Widget buildMenuButtonPickupPoint () {
@@ -452,17 +392,7 @@ class _ComponentState extends State<Component> {
 
 
   Widget buildStudentIdStudentCreateAccount() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xffF4F6F8),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 48,
-          child: TextFormField(
+    return  TextFormField(
             controller: studentIDControllerStudent,
             keyboardType: TextInputType.number,
             style: TextStyle(
@@ -477,25 +407,13 @@ class _ComponentState extends State<Component> {
                 ),
                 hintText: 'Student ID',
                 hintStyle: TextStyle(color: Colors.black38)),
-          ),
-        )
-      ],
-    );
+          );
+      
   }
 
 
   Widget buildUserNameStudentCreateAccount() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xffF4F6F8),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 48,
-          child: TextFormField(
+    return TextFormField(
             controller: usernameControllerStudent,
             keyboardType: TextInputType.number,
             style: TextStyle(
@@ -510,25 +428,13 @@ class _ComponentState extends State<Component> {
                 ),
                 hintText: 'User Name',
                 hintStyle: TextStyle(color: Colors.black38)),
-          ),
-        )
-      ],
-    );
+          );
+       
   }
 
 
   Widget buildMobileNumberStudentCreateAccount() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xffF4F6F8),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 48,
-          child: TextFormField(
+    return  TextFormField(
             controller: mobilenumberControllerStudent,
             keyboardType: TextInputType.phone,
             style: TextStyle(
@@ -547,24 +453,12 @@ class _ComponentState extends State<Component> {
                 ),
                 hintText: 'Phone Number',
                 hintStyle: TextStyle(color: Colors.black38)),
-          ),
-        )
-      ],
-    );
+          );
+       
   }
 
   Widget buildEmailStudentCreateAccount() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xffF4F6F8),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 48,
-          child: TextFormField(
+    return  TextFormField(
             controller: emailControllerStudent,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
@@ -583,25 +477,13 @@ class _ComponentState extends State<Component> {
                 ),
                 hintText: 'Email',
                 hintStyle: TextStyle(color: Colors.black38)),
-          ),
-        )
-      ],
-    );
+          );
+       
   }
 
 
   Widget buildPasswordStudentCreateAccount() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xffF4F6F8),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 48,
-          child: TextFormField(
+    return  TextFormField(
             controller: passwordControllerStudent,
             obscureText: true,
             style: TextStyle(color: Colors.black),
@@ -618,25 +500,13 @@ class _ComponentState extends State<Component> {
                 ),
                 hintText: 'password',
                 hintStyle: TextStyle(color: Colors.black38)),
-          ),
-        )
-      ],
-    );
+          );
+      
   }
 
 
   Widget buildConfirmPasswordStudentCreateAccount() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xffF4F6F8),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 48,
-          child: TextFormField(
+    return  TextFormField(
             controller: confirmpasswordControllerStudent,
             obscureText: true,
             style: TextStyle(color: Colors.black),
@@ -653,24 +523,12 @@ class _ComponentState extends State<Component> {
                 ),
                 hintText: 'password',
                 hintStyle: TextStyle(color: Colors.black38)),
-          ),
-        )
-      ],
-    );
+          );
+    
   }
 
   Widget buildBloodGroupStudentCreateAccount() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xffF4F6F8),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 48,
-          child: TextFormField(
+    return TextFormField(
             controller: bloodgroupControllerStudent,
             keyboardType: TextInputType.text,
             style: TextStyle(
@@ -689,10 +547,8 @@ class _ComponentState extends State<Component> {
                 ),
                 hintText: 'Blood Group',
                 hintStyle: TextStyle(color: Colors.black38)),
-          ),
-        )
-      ],
-    );
+          );
+     
   }
 
 
@@ -701,17 +557,7 @@ class _ComponentState extends State<Component> {
 
 
   Widget buildStudentIdDriverCreateAccount() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xffF4F6F8),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 48,
-          child: TextFormField(
+    return TextFormField(
             controller: studentIDControllerDriver,
             keyboardType: TextInputType.number,
             style: TextStyle(
@@ -726,25 +572,13 @@ class _ComponentState extends State<Component> {
                 ),
                 hintText: 'Student ID',
                 hintStyle: TextStyle(color: Colors.black38)),
-          ),
-        )
-      ],
-    );
+          );
+   
   }
 
 
   Widget buildUserNameDriverCreateAccount() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xffF4F6F8),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 48,
-          child: TextFormField(
+    return  TextFormField(
             controller: usernameControllerDriver,
             keyboardType: TextInputType.number,
             style: TextStyle(
@@ -759,25 +593,13 @@ class _ComponentState extends State<Component> {
                 ),
                 hintText: 'User Name',
                 hintStyle: TextStyle(color: Colors.black38)),
-          ),
-        )
-      ],
-    );
+          );
+      
   }
 
 
   Widget buildMobileNumberDriverCreateAccount() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xffF4F6F8),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 48,
-          child: TextFormField(
+    return  TextFormField(
             controller: mobilenumberControllerDriver,
             keyboardType: TextInputType.phone,
             style: TextStyle(
@@ -796,24 +618,12 @@ class _ComponentState extends State<Component> {
                 ),
                 hintText: 'Phone Number',
                 hintStyle: TextStyle(color: Colors.black38)),
-          ),
-        )
-      ],
-    );
+          );
+    
   }
 
   Widget buildEmailDriverCreateAccount() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xffF4F6F8),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 48,
-          child: TextFormField(
+    return  TextFormField(
             controller: emailControllerDriver,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
@@ -832,25 +642,13 @@ class _ComponentState extends State<Component> {
                 ),
                 hintText: 'Email',
                 hintStyle: TextStyle(color: Colors.black38)),
-          ),
-        )
-      ],
-    );
+          );
+     
   }
 
 
   Widget buildPasswordDriverCreateAccount() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xffF4F6F8),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 48,
-          child: TextFormField(
+    return TextFormField(
             controller: passwordControllerDriver,
             obscureText: true,
             style: TextStyle(color: Colors.black),
@@ -867,25 +665,13 @@ class _ComponentState extends State<Component> {
                 ),
                 hintText: 'password',
                 hintStyle: TextStyle(color: Colors.black38)),
-          ),
-        )
-      ],
-    );
+          );
+    
   }
 
 
   Widget buildConfirmPasswordDriverCreateAccount() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xffF4F6F8),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 48,
-          child: TextFormField(
+    return  TextFormField(
             controller: confirmpasswordControllerDriver,
             obscureText: true,
             style: TextStyle(color: Colors.black),
@@ -902,24 +688,12 @@ class _ComponentState extends State<Component> {
                 ),
                 hintText: 'password',
                 hintStyle: TextStyle(color: Colors.black38)),
-          ),
-        )
-      ],
-    );
+          );
+    
   }
 
   Widget buildBloodGroupDriverCreateAccount() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: Color(0xffF4F6F8),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 48,
-          child: TextFormField(
+    return  TextFormField(
             controller: bloodgroupControllerDriver,
             keyboardType: TextInputType.text,
             style: TextStyle(
@@ -938,12 +712,92 @@ class _ComponentState extends State<Component> {
                 ),
                 hintText: 'Blood Group',
                 hintStyle: TextStyle(color: Colors.black38)),
-          ),
-        )
-      ],
+          );
+      
+  }
+
+  Widget buildUseCameraBtn() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 10),
+      width: double.infinity,
+      child: RaisedButton(
+          onPressed: () => captureImage(),
+          padding: EdgeInsets.all(15),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          color: Color(0xff800080),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Use Camera',
+                style: GoogleFonts.rubik(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal),
+              ),
+              Icon(
+                Icons.camera_alt_outlined,
+                color: Colors.white,
+              )
+            ],
+          )),
     );
   }
 
+  Widget buildGalleryBtn() {
+    return GestureDetector(
+        onTap: () => pickImage(),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Icon(
+              Icons.image_outlined,
+              color: Color(0xff800080),
+            ),
+            RichText(
+              text: TextSpan(children: [
+                TextSpan(
+                    text: 'Select the documents from Gallery',
+                    style: GoogleFonts.rubik(
+                        color: Color(0xff800080),
+                        fontSize: 15,
+                        fontWeight: FontWeight.normal)),
+                TextSpan(
+                    text: '\n.png or .jpeg file',
+                    style: TextStyle(
+                        color: Color(0xffBEBEBE),
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal))
+              ]),
+            ),
+          ],
+        ));
+  }
+
+  Future captureImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.camera);
+    if (image == null) return;
+
+    
+  }
+
+  Future pickImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (image == null) return;
+
+  }
+
+  Widget displayImage() {
+   
+    return Container(
+        padding: EdgeInsets.all(20),
+        child:  CircleAvatar(
+                radius: 30.0,
+                backgroundImage: (), //here
+              ));
+  }
 
 
 
