@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:cholo/components/components.dart';
+import 'package:otp_text_field/otp_field.dart';
+import 'package:otp_text_field/style.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,21 +15,30 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+  title: "Cholo",
+  theme: ThemeData(
+    // Define the default brightness and colors.
+    /*brightness: Brightness.dark,*/ 
+    buttonTheme: ButtonThemeData(  
+      buttonColor: Color(0xffEB5757),
+    ),
+    primaryColor: Colors.lightBlue[800],
+
+    // Define the default font family.
+    fontFamily: 'Georgia',
+
+    // Define the default `TextTheme`. Use this to specify the default
+    // text styling for headlines, titles, bodies of text, and more.
+    /*textTheme: const TextTheme(
+      headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+      headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+      bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+    ),*/
+  ),
+  home: const MyHomePage(
+    title: "Cholo",
+  ),
+);
   }
 }
 
@@ -63,6 +76,19 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController mobilenumberControllerSignUp1 = TextEditingController();
+
+    final List<String> locationItems =  <String> [
+      'Select Pickup Point',
+    'Badda',
+    'Rampura',
+    'Gulshan',
+    'Uttara',
+  ];
+
+  String? selectedItem = 'Select Pickup Point';
+
+    OtpFieldController otpController = OtpFieldController();
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -75,41 +101,47 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+      body:  Center(
+        
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Color(0xffEB5757),
+            
+          ),
+          child: DropdownButton<String>(
+      value: selectedItem,
+      icon: const Icon(Icons.arrow_downward,color: Colors.white,),
+      underline: Container(
+        height: 1,
+        color: Color(0xffEB5757),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+      elevation: 16,
+      dropdownColor: Color(0xffEB5757),
+      style: const TextStyle(color: Colors.white),
+      onChanged: (String? value) {
+          // This is called when the user selects an item.
+          setState(() {
+            selectedItem = value!;
+            
+          });
+      },
+      items: locationItems.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+      }).toList(),
+    ),
+        )
+  
+  
+        ),
+      );
+    
+      
+       // This trailing comma makes auto-formatting nicer for build methods.
+  
   }
 }

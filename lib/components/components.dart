@@ -1,14 +1,14 @@
 import 'package:cholo/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+/*import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';*/
 import 'package:google_fonts/google_fonts.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
+/*import 'package:dropdown_button2/dropdown_button2.dart';*/
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-
+import 'package:file_picker/file_picker.dart';
 
 class Component extends StatefulWidget {
   const Component({Key? key}) : super(key: key);
@@ -18,7 +18,6 @@ class Component extends StatefulWidget {
 }
 
 class _ComponentState extends State<Component> {
-
   late File image;
 
   TextEditingController emailControllerLogin = TextEditingController();
@@ -31,7 +30,8 @@ class _ComponentState extends State<Component> {
   TextEditingController mobilenumberControllerStudent = TextEditingController();
   TextEditingController emailControllerStudent = TextEditingController();
   TextEditingController passwordControllerStudent = TextEditingController();
-  TextEditingController confirmpasswordControllerStudent = TextEditingController();
+  TextEditingController confirmpasswordControllerStudent =
+      TextEditingController();
   TextEditingController bloodgroupControllerStudent = TextEditingController();
 
   TextEditingController studentIDControllerDriver = TextEditingController();
@@ -39,15 +39,18 @@ class _ComponentState extends State<Component> {
   TextEditingController mobilenumberControllerDriver = TextEditingController();
   TextEditingController emailControllerDriver = TextEditingController();
   TextEditingController passwordControllerDriver = TextEditingController();
-  TextEditingController confirmpasswordControllerDriver = TextEditingController();
+  TextEditingController confirmpasswordControllerDriver =
+      TextEditingController();
   TextEditingController bloodgroupControllerDriver = TextEditingController();
 
-  final List<String> locationItems = [
+  final List<String> locationItems = <String>[
     'Badda',
     'Rampura',
     'Gulshan',
     'Uttara',
   ];
+
+  String? selectedItem = 'item1';
 
   final List<String> Menuitems = [
     'Item1',
@@ -57,8 +60,13 @@ class _ComponentState extends State<Component> {
 
   String? selectedValue;
 
-  final _formKey = GlobalKey<FormState>();
+  FilePickerResult? result;
+  String? filename;
+  PlatformFile? pickedfile;
+  bool isloading = false;
+  File? filetodisplay;
 
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -66,204 +74,279 @@ class _ComponentState extends State<Component> {
     super.initState();
   }
 
+  void pickfile() async {
+    try {
+      setState(() {
+        isloading = true;
+      });
 
-  Widget buildGetStartedButton() {
-    return  ElevatedButton(
-        elevation: 5,
-        onPressed:() {} ,
-        padding: EdgeInsets.all(15),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        color: Color(0xffEB5757),
-        child:  Text(
-                'Get Started',
-                style: GoogleFonts.rubik(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.normal),
-              ),
+      result = await FilePicker.platform.pickFiles(
+        type: FileType.any,
+        allowMultiple: false,
       );
-    
+
+      if (result != null) {
+        filename = result!.files.first.name;
+        pickedfile = result!.files.first;
+        filetodisplay = File(pickedfile!.path.toString()); 
+        print(filename);
+      }
+
+      setState(() {
+        isloading = false;
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
-  Widget buildEmailLogin() { 
-    return  TextFormField(
-            controller: emailControllerLogin,
-            keyboardType: TextInputType.emailAddress,
-            style: TextStyle(
-              color: Colors.black,
-            ),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color(0xffEB5757), width: 2.0),
-                ),
-                prefixIcon: Icon(
-                  Icons.email,
-                  color: Colors.black,
-                ),
-                hintText: 'Email',
-                hintStyle: TextStyle(color: Colors.black38)),
-          );
-       
-  }
+  Widget FilePickTextButton() {
+    return Column(
+      children: [
+        TextButton(
+            onPressed: () {
+              pickfile();
+            },
+            child: Text(
+              "Upload Documents",
+              style: TextStyle(fontSize: 17),
+            )),
 
-  Widget buildPasswordLogin() {
-    return  TextFormField(
-            controller: passwordControllerLogin,
-            obscureText: true,
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color(0xff800080), width: 2.0),
-                ),
-                prefixIcon: Icon(
-                  Icons.lock,
-                  color: Colors.black,
-                ),
-                hintText: 'password',
-                hintStyle: TextStyle(color: Colors.black38)),
-          );
-        
-  }
-
-  Widget buildForgetPasswordLogin () {
-    return Column(children: [
-      TextButton(
-              onPressed: () {},
-             
-              padding: EdgeInsets.only(right: 0),
-              child: Text(
-                'Forgot your Password?',
-                style: TextStyle(
-                    color: Colors.black45, fontWeight: FontWeight.normal),
+            if (pickedfile != null)
+              SizedBox(
+                height: 200,
+                width: 200,
+                child: Image.file(filetodisplay!),
               ),
-            )
-    ],);
-  }
 
-  Widget buildLetsCombatButtonLogin() {
-    return  ElevatedButton(
-        elevation: 5,
-        onPressed:() {} ,
-        padding: EdgeInsets.all(15),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        color: Color(0xffEB5757),
-        child:  Text(
-                'Let*\'s Combat',
-                style: GoogleFonts.rubik(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.normal),
-              ),
-      );
-    
-  }
-
-  Widget buildCreateAccountLogin () {
-    return 
-      TextButton(
-              onPressed: () {}, 
-              padding: EdgeInsets.only(right: 0),
-              child: Text(
-                'Create Account',
-                style: TextStyle(
-                    color: Colors.black45, fontWeight: FontWeight.normal),
-              ),
-            );
-    
-  }
-
-  Widget EnterPhoneNumberSignup1 () {
-    return TextFormField(
-            controller: mobilenumberControllerSignUp1,
-            keyboardType: TextInputType.phone,
-            style: TextStyle(
-              color: Colors.black,
-            ),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color(0xffEB5757), width: 2.0),
-                ),
-                
-          ),
-        );
-  }
-
-  Widget buildExistingAccountSignUp1 () {
-    return
-      TextButton(
-              onPressed: () {
-                
-              },
-              padding: EdgeInsets.only(right: 0),
-              child: Text(
-                'Already have an account ?',
-                style: TextStyle(
-                    color: Colors.black45, fontWeight: FontWeight.normal),
-              ),
-            );
-    
-  }
-
-  Widget buildNextButton () {
-    return ElevatedButton(
-        elevation: 5,
-        onPressed:() {} ,
-        padding: EdgeInsets.all(15),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        color: Color(0xffEB5757),
-        child:  Text(
-                'Next',
-                style: GoogleFonts.rubik(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.normal),
-              ),
-      );
-    
-  }
-  
-  Widget buildOTPfieldSignUp3 () {
-    return OTPTextField(
-      length: 4,
-      width: double.infinity,
-      fieldWidth: 280,
-      style: TextStyle( 
-        fontSize: 17,
-      ),
-      textFieldAlignment: MainAxisAlignment.spaceAround,
-      fieldStyle: FieldStyle.underline,
-      onCompleted: (pin) {
-       print("Completed: " + pin);
-  },
+            
+      ],
     );
   }
 
-  Widget buildResendCodeSignUp3 () {
-    return 
-      TextButton(
-              onPressed: () {
-                
-              },
-              padding: EdgeInsets.only(right: 0),
-              child: Text(
-                'Resend Code',
-                style: TextStyle(
-                    color: Color(0xffEB5757), fontWeight: FontWeight.normal),
-              ),
-            );
-   
+  Widget dropdrownMenuPickUpPoint() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Color(0xffEB5757),
+      ),
+      child: DropdownButton<String>(
+        value: selectedItem,
+        icon: const Icon(
+          Icons.arrow_downward,
+          color: Colors.white,
+        ),
+        underline: Container(
+          height: 1,
+          color: Color(0xffEB5757),
+        ),
+        elevation: 16,
+        dropdownColor: Color(0xffEB5757),
+        style: const TextStyle(color: Colors.white),
+        onChanged: (String? value) {
+          // This is called when the user selects an item.
+          setState(() {
+            selectedItem = value!;
+          });
+        },
+        items: locationItems.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+      ),
+    );
   }
 
-  Widget buildMenuButtonPickupPoint () {
+  Widget buildGetStartedButton() {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        elevation: 5,
+        padding: EdgeInsets.all(15),
+        primary: Color(0xffEB5757),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      ),
+      onPressed: () {},
+      child: Text(
+        'Get Started',
+        style: GoogleFonts.rubik(
+            color: Colors.white, fontSize: 15, fontWeight: FontWeight.normal),
+      ),
+    );
+  }
+
+  Widget buildEmailLogin() {
+    return TextFormField(
+      controller: emailControllerLogin,
+      keyboardType: TextInputType.emailAddress,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(top: 14),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xffEB5757), width: 2.0),
+          ),
+          prefixIcon: Icon(
+            Icons.email,
+            color: Colors.black,
+          ),
+          hintText: 'Email',
+          hintStyle: TextStyle(color: Colors.black38)),
+    );
+  }
+
+  Widget buildPasswordLogin() {
+    return TextFormField(
+      controller: passwordControllerLogin,
+      obscureText: true,
+      style: TextStyle(color: Colors.black),
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(top: 14),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xff800080), width: 2.0),
+          ),
+          prefixIcon: Icon(
+            Icons.lock,
+            color: Colors.black,
+          ),
+          hintText: 'password',
+          hintStyle: TextStyle(color: Colors.black38)),
+    );
+  }
+
+  Widget buildForgetPasswordLogin() {
+    return TextButton(
+      onPressed: () {},
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.only(right: 0),
+      ),
+      child: Text(
+        'Forgot your Password?',
+        style: TextStyle(color: Colors.black45, fontWeight: FontWeight.normal),
+      ),
+    );
+  }
+
+  Widget buildLetsCombatButtonLogin() {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        elevation: 5,
+        primary: Color(0xffEB5757),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        padding: EdgeInsets.all(15),
+      ),
+      onPressed: () {},
+      child: Text(
+        'Let*\'s Combat',
+        style: GoogleFonts.rubik(
+            color: Colors.white, fontSize: 15, fontWeight: FontWeight.normal),
+      ),
+    );
+  }
+
+  Widget buildCreateAccountLogin() {
+    return TextButton(
+      onPressed: () {},
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.only(right: 0),
+      ),
+      child: Text(
+        'Create Account',
+        style: TextStyle(color: Colors.black45, fontWeight: FontWeight.normal),
+      ),
+    );
+  }
+
+  Widget EnterPhoneNumberSignup1() {
+    return TextFormField(
+      controller: mobilenumberControllerSignUp1,
+      keyboardType: TextInputType.phone,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.only(top: 14),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Color(0xffEB5757), width: 2.0),
+        ),
+      ),
+    );
+  }
+
+  Widget buildExistingAccountSignUp1() {
+    return TextButton(
+      onPressed: () {},
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.only(right: 0),
+      ),
+      child: Text(
+        'Already have an account ?',
+        style: TextStyle(color: Colors.black45, fontWeight: FontWeight.normal),
+      ),
+    );
+  }
+
+  Widget buildNextButton() {
+    return SizedBox(
+      height: 60,
+      width: 200,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          elevation: 5,
+          padding: EdgeInsets.all(20),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+          primary: Color(0xffEB5757),
+        ),
+        onPressed: () {},
+        child: Text(
+          'Next',
+          style: GoogleFonts.rubik(
+              color: Colors.white, fontSize: 17, fontWeight: FontWeight.normal),
+        ),
+      ),
+    );
+  }
+
+  Widget buildOTPfieldSignUp3() {
+    OtpFieldController otpController = OtpFieldController();
+    return OTPTextField(
+        controller: otpController,
+        length: 4,
+        width: MediaQuery.of(context).size.width,
+        textFieldAlignment: MainAxisAlignment.spaceAround,
+        fieldWidth: 45,
+        fieldStyle: FieldStyle.underline,
+        style: TextStyle(fontSize: 17),
+        onChanged: (pin) {
+          print("Changed: " + pin);
+        },
+        onCompleted: (pin) {
+          print("Completed: " + pin);
+        });
+  }
+
+  Widget buildResendCodeSignUp3() {
+    return TextButton(
+      onPressed: () {},
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.only(right: 0),
+      ),
+      child: Text(
+        'Resend Code',
+        style:
+            TextStyle(color: Color(0xffEB5757), fontWeight: FontWeight.normal),
+      ),
+    );
+  }
+
+  /*Widget buildMenuButtonPickupPoint () {
     return DropdownButtonHideUnderline(
         child: DropdownButton2(
           isExpanded: true,
@@ -333,9 +416,9 @@ class _ComponentState extends State<Component> {
           offset: const Offset(-20, 0),
         ),
       );
-  }
+  }*/
 
-  Widget buildDropdownPickupPoint () {
+  /* Widget buildDropdownPickupPoint () {
     return DropdownButtonFormField2(
               decoration: InputDecoration(
                 //Add isDense true and zero Padding.
@@ -350,7 +433,7 @@ class _ComponentState extends State<Component> {
               ),
               isExpanded: true,
               hint: const Text(
-                'Select Your Gender',
+                'Select Your Location',
                 style: TextStyle(fontSize: 14),
               ),
               icon: const Icon(
@@ -387,333 +470,290 @@ class _ComponentState extends State<Component> {
                 selectedValue = value.toString();
               },
             );
-  }
-
-
+  }*/
 
   Widget buildStudentIdStudentCreateAccount() {
-    return  TextFormField(
-            controller: studentIDControllerStudent,
-            keyboardType: TextInputType.number,
-            style: TextStyle(
-              color: Colors.black,
-            ),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color(0xffEB5757), width: 2.0),
-                ),
-                hintText: 'Student ID',
-                hintStyle: TextStyle(color: Colors.black38)),
-          );
-      
+    return TextFormField(
+      controller: studentIDControllerStudent,
+      keyboardType: TextInputType.number,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(top: 14),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xffEB5757), width: 2.0),
+          ),
+          hintText: 'Student ID',
+          hintStyle: TextStyle(color: Colors.black38)),
+    );
   }
-
 
   Widget buildUserNameStudentCreateAccount() {
     return TextFormField(
-            controller: usernameControllerStudent,
-            keyboardType: TextInputType.number,
-            style: TextStyle(
-              color: Colors.black,
-            ),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color(0xffEB5757), width: 2.0),
-                ),
-                hintText: 'User Name',
-                hintStyle: TextStyle(color: Colors.black38)),
-          );
-       
+      controller: usernameControllerStudent,
+      keyboardType: TextInputType.number,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(top: 14),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xffEB5757), width: 2.0),
+          ),
+          hintText: 'User Name',
+          hintStyle: TextStyle(color: Colors.black38)),
+    );
   }
 
-
   Widget buildMobileNumberStudentCreateAccount() {
-    return  TextFormField(
-            controller: mobilenumberControllerStudent,
-            keyboardType: TextInputType.phone,
-            style: TextStyle(
-              color: Colors.black,
-            ),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color(0xffEB5757), width: 2.0),
-                ),
-                prefixIcon: Icon(
-                  Icons.phone,
-                  color: Colors.black,
-                ),
-                hintText: 'Phone Number',
-                hintStyle: TextStyle(color: Colors.black38)),
-          );
-       
+    return TextFormField(
+      controller: mobilenumberControllerStudent,
+      keyboardType: TextInputType.phone,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(top: 14),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xffEB5757), width: 2.0),
+          ),
+          prefixIcon: Icon(
+            Icons.phone,
+            color: Colors.black,
+          ),
+          hintText: 'Phone Number',
+          hintStyle: TextStyle(color: Colors.black38)),
+    );
   }
 
   Widget buildEmailStudentCreateAccount() {
-    return  TextFormField(
-            controller: emailControllerStudent,
-            keyboardType: TextInputType.emailAddress,
-            style: TextStyle(
-              color: Colors.black,
-            ),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color(0xffEB5757), width: 2.0),
-                ),
-                prefixIcon: Icon(
-                  Icons.email,
-                  color: Colors.black,
-                ),
-                hintText: 'Email',
-                hintStyle: TextStyle(color: Colors.black38)),
-          );
-       
+    return TextFormField(
+      controller: emailControllerStudent,
+      keyboardType: TextInputType.emailAddress,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(top: 14),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xffEB5757), width: 2.0),
+          ),
+          prefixIcon: Icon(
+            Icons.email,
+            color: Colors.black,
+          ),
+          hintText: 'Email',
+          hintStyle: TextStyle(color: Colors.black38)),
+    );
   }
-
 
   Widget buildPasswordStudentCreateAccount() {
-    return  TextFormField(
-            controller: passwordControllerStudent,
-            obscureText: true,
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color(0xff800080), width: 2.0),
-                ),
-                prefixIcon: Icon(
-                  Icons.lock,
-                  color: Colors.black,
-                ),
-                hintText: 'password',
-                hintStyle: TextStyle(color: Colors.black38)),
-          );
-      
+    return TextFormField(
+      controller: passwordControllerStudent,
+      obscureText: true,
+      style: TextStyle(color: Colors.black),
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(top: 14),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xff800080), width: 2.0),
+          ),
+          prefixIcon: Icon(
+            Icons.lock,
+            color: Colors.black,
+          ),
+          hintText: 'password',
+          hintStyle: TextStyle(color: Colors.black38)),
+    );
   }
 
-
   Widget buildConfirmPasswordStudentCreateAccount() {
-    return  TextFormField(
-            controller: confirmpasswordControllerStudent,
-            obscureText: true,
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color(0xff800080), width: 2.0),
-                ),
-                prefixIcon: Icon(
-                  Icons.lock,
-                  color: Colors.black,
-                ),
-                hintText: 'password',
-                hintStyle: TextStyle(color: Colors.black38)),
-          );
-    
+    return TextFormField(
+      controller: confirmpasswordControllerStudent,
+      obscureText: true,
+      style: TextStyle(color: Colors.black),
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(top: 14),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xff800080), width: 2.0),
+          ),
+          prefixIcon: Icon(
+            Icons.lock,
+            color: Colors.black,
+          ),
+          hintText: 'password',
+          hintStyle: TextStyle(color: Colors.black38)),
+    );
   }
 
   Widget buildBloodGroupStudentCreateAccount() {
     return TextFormField(
-            controller: bloodgroupControllerStudent,
-            keyboardType: TextInputType.text,
-            style: TextStyle(
-              color: Colors.black,
-            ),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color(0xffEB5757), width: 2.0),
-                ),
-                prefixIcon: Icon(
-                  Icons.email,
-                  color: Colors.black,
-                ),
-                hintText: 'Blood Group',
-                hintStyle: TextStyle(color: Colors.black38)),
-          );
-     
+      controller: bloodgroupControllerStudent,
+      keyboardType: TextInputType.text,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(top: 14),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xffEB5757), width: 2.0),
+          ),
+          prefixIcon: Icon(
+            Icons.email,
+            color: Colors.black,
+          ),
+          hintText: 'Blood Group',
+          hintStyle: TextStyle(color: Colors.black38)),
+    );
   }
-
-
-
-
-
 
   Widget buildStudentIdDriverCreateAccount() {
     return TextFormField(
-            controller: studentIDControllerDriver,
-            keyboardType: TextInputType.number,
-            style: TextStyle(
-              color: Colors.black,
-            ),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color(0xffEB5757), width: 2.0),
-                ),
-                hintText: 'Student ID',
-                hintStyle: TextStyle(color: Colors.black38)),
-          );
-   
+      controller: studentIDControllerDriver,
+      keyboardType: TextInputType.number,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(top: 14),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xffEB5757), width: 2.0),
+          ),
+          hintText: 'Student ID',
+          hintStyle: TextStyle(color: Colors.black38)),
+    );
   }
-
 
   Widget buildUserNameDriverCreateAccount() {
-    return  TextFormField(
-            controller: usernameControllerDriver,
-            keyboardType: TextInputType.number,
-            style: TextStyle(
-              color: Colors.black,
-            ),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color(0xffEB5757), width: 2.0),
-                ),
-                hintText: 'User Name',
-                hintStyle: TextStyle(color: Colors.black38)),
-          );
-      
+    return TextFormField(
+      controller: usernameControllerDriver,
+      keyboardType: TextInputType.number,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(top: 14),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xffEB5757), width: 2.0),
+          ),
+          hintText: 'User Name',
+          hintStyle: TextStyle(color: Colors.black38)),
+    );
   }
 
-
   Widget buildMobileNumberDriverCreateAccount() {
-    return  TextFormField(
-            controller: mobilenumberControllerDriver,
-            keyboardType: TextInputType.phone,
-            style: TextStyle(
-              color: Colors.black,
-            ),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color(0xffEB5757), width: 2.0),
-                ),
-                prefixIcon: Icon(
-                  Icons.phone,
-                  color: Colors.black,
-                ),
-                hintText: 'Phone Number',
-                hintStyle: TextStyle(color: Colors.black38)),
-          );
-    
+    return TextFormField(
+      controller: mobilenumberControllerDriver,
+      keyboardType: TextInputType.phone,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(top: 14),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xffEB5757), width: 2.0),
+          ),
+          prefixIcon: Icon(
+            Icons.phone,
+            color: Colors.black,
+          ),
+          hintText: 'Phone Number',
+          hintStyle: TextStyle(color: Colors.black38)),
+    );
   }
 
   Widget buildEmailDriverCreateAccount() {
-    return  TextFormField(
-            controller: emailControllerDriver,
-            keyboardType: TextInputType.emailAddress,
-            style: TextStyle(
-              color: Colors.black,
-            ),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color(0xffEB5757), width: 2.0),
-                ),
-                prefixIcon: Icon(
-                  Icons.email,
-                  color: Colors.black,
-                ),
-                hintText: 'Email',
-                hintStyle: TextStyle(color: Colors.black38)),
-          );
-     
+    return TextFormField(
+      controller: emailControllerDriver,
+      keyboardType: TextInputType.emailAddress,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(top: 14),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xffEB5757), width: 2.0),
+          ),
+          prefixIcon: Icon(
+            Icons.email,
+            color: Colors.black,
+          ),
+          hintText: 'Email',
+          hintStyle: TextStyle(color: Colors.black38)),
+    );
   }
-
 
   Widget buildPasswordDriverCreateAccount() {
     return TextFormField(
-            controller: passwordControllerDriver,
-            obscureText: true,
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color(0xff800080), width: 2.0),
-                ),
-                prefixIcon: Icon(
-                  Icons.lock,
-                  color: Colors.black,
-                ),
-                hintText: 'password',
-                hintStyle: TextStyle(color: Colors.black38)),
-          );
-    
+      controller: passwordControllerDriver,
+      obscureText: true,
+      style: TextStyle(color: Colors.black),
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(top: 14),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xff800080), width: 2.0),
+          ),
+          prefixIcon: Icon(
+            Icons.lock,
+            color: Colors.black,
+          ),
+          hintText: 'password',
+          hintStyle: TextStyle(color: Colors.black38)),
+    );
   }
 
-
   Widget buildConfirmPasswordDriverCreateAccount() {
-    return  TextFormField(
-            controller: confirmpasswordControllerDriver,
-            obscureText: true,
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color(0xff800080), width: 2.0),
-                ),
-                prefixIcon: Icon(
-                  Icons.lock,
-                  color: Colors.black,
-                ),
-                hintText: 'password',
-                hintStyle: TextStyle(color: Colors.black38)),
-          );
-    
+    return TextFormField(
+      controller: confirmpasswordControllerDriver,
+      obscureText: true,
+      style: TextStyle(color: Colors.black),
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(top: 14),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xff800080), width: 2.0),
+          ),
+          prefixIcon: Icon(
+            Icons.lock,
+            color: Colors.black,
+          ),
+          hintText: 'password',
+          hintStyle: TextStyle(color: Colors.black38)),
+    );
   }
 
   Widget buildBloodGroupDriverCreateAccount() {
-    return  TextFormField(
-            controller: bloodgroupControllerDriver,
-            keyboardType: TextInputType.text,
-            style: TextStyle(
-              color: Colors.black,
-            ),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color(0xffEB5757), width: 2.0),
-                ),
-                prefixIcon: Icon(
-                  Icons.email,
-                  color: Colors.black,
-                ),
-                hintText: 'Blood Group',
-                hintStyle: TextStyle(color: Colors.black38)),
-          );
-      
+    return TextFormField(
+      controller: bloodgroupControllerDriver,
+      keyboardType: TextInputType.text,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(top: 14),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xffEB5757), width: 2.0),
+          ),
+          prefixIcon: Icon(
+            Icons.email,
+            color: Colors.black,
+          ),
+          hintText: 'Blood Group',
+          hintStyle: TextStyle(color: Colors.black38)),
+    );
   }
 
   Widget buildUseCameraBtn() {
@@ -722,10 +762,12 @@ class _ComponentState extends State<Component> {
       width: double.infinity,
       child: ElevatedButton(
           onPressed: () => captureImage(),
-          padding: EdgeInsets.all(15),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          color: Color(0xff800080),
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.all(15),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            primary: Color(0xff800080),
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -778,18 +820,15 @@ class _ComponentState extends State<Component> {
   Future captureImage() async {
     final image = await ImagePicker().pickImage(source: ImageSource.camera);
     if (image == null) return;
-
-    
   }
 
   Future pickImage() async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (image == null) return;
-
   }
 
-  Widget displayImage() {
+  /* Widget displayImage() {
    
     return Container(
         padding: EdgeInsets.all(20),
@@ -797,14 +836,9 @@ class _ComponentState extends State<Component> {
                 radius: 30.0,
                 backgroundImage: (), //here
               ));
-  }
-
-
-
-
-
+  }*/
 
   Widget build(BuildContext context) {
-    return Scaffold();  
+    return Scaffold();
   }
 }
