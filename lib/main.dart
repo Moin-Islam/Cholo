@@ -1,3 +1,6 @@
+import 'package:cholo/pages/dashboard.dart';
+import 'package:cholo/pages/login.dart';
+import 'package:cholo/pages/pickuplocation.dart';
 import 'package:flutter/material.dart';
 import 'package:cholo/components/components.dart';
 import 'package:otp_text_field/otp_field.dart';
@@ -95,50 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body:  Center(
-        
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Color(0xffEB5757),
-            
-          ),
-          child: DropdownButton<String>(
-      value: selectedItem,
-      icon: const Icon(Icons.arrow_downward,color: Colors.white,),
-      underline: Container(
-        height: 1,
-        color: Color(0xffEB5757),
-      ),
-      elevation: 16,
-      dropdownColor: Color(0xffEB5757),
-      style: const TextStyle(color: Colors.white),
-      onChanged: (String? value) {
-          // This is called when the user selects an item.
-          setState(() {
-            selectedItem = value!;
-            
-          });
-      },
-      items: locationItems.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
-      }).toList(),
-    ),
-        )
-  
-  
-        ),
-      );
+    return Dashboard();
     
       
        // This trailing comma makes auto-formatting nicer for build methods.
