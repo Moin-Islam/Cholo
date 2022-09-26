@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cholo/pages/dashboard.dart';
 
 class PickupLocation extends StatefulWidget {
   const PickupLocation({Key? key}) : super(key: key);
@@ -31,12 +32,12 @@ class _PickupLocationState extends State<PickupLocation> {
 
   String? selectedClassItem = 'Enter Your Class Time';
 
-  Widget buildCholoImage() {
+  Widget buildMapImage() {
     return SizedBox(
       height: 200,
       width: 400,
       child: Image(
-        image: AssetImage('images/Cholo.png'),
+        image: AssetImage('images/map.jpg'),
       ),
     );
   }
@@ -187,7 +188,12 @@ class _PickupLocationState extends State<PickupLocation> {
                   borderRadius: BorderRadius.circular(15.0)),
               primary: Color(0xffEB5757),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Dashboard()),
+          );
+            },
             child: Text(
               'Back',
               style: GoogleFonts.rubik(
@@ -228,20 +234,23 @@ class _PickupLocationState extends State<PickupLocation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width * 0.1, vertical: 30),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            buildCholoImage(),
-            buildSelectLocation(),
-            // buildDetectLocationButton(),
-            buildEnterClassTime(),
-            buildBottomButtons(),
-          ],
+      body: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width * 0.1, vertical: 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+             
+              buildSelectLocation(),
+               buildMapImage(),
+              // buildDetectLocationButton(),
+              buildEnterClassTime(),
+              buildBottomButtons(),
+            ],
+          ),
         ),
       ),
     );

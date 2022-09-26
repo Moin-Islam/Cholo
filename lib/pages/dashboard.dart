@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cholo/pages/messages.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -45,43 +46,52 @@ class _DashboardState extends State<Dashboard> {
           borderRadius: BorderRadius.circular(5)),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              
-              Icon(
-                vehical == "car" ? Icons.car_repair : Icons.motorcycle,
-                size: 30,
-              ),
-              Column(
-                children: [
-                  Text(
-                    "161611454",
-                    style: GoogleFonts.poppins(
-                        fontSize: 15,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.black),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "Mr. X",
-                    style: GoogleFonts.poppins(
-                        fontSize: 15,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.black),
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  IconButton(onPressed: () {}, icon: Icon(Icons.call)),
-                  IconButton(
-                      onPressed: () {}, icon: Icon(Icons.message_outlined)),
-                ],
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Icon(
+                  vehical == "car" ? Icons.car_repair : Icons.motorcycle,
+                  size: 30,
+                ),
+                Column(
+                  children: [
+                    Text(
+                      "161611454",
+                      style: GoogleFonts.poppins(
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      "Mr. X",
+                      style: GoogleFonts.poppins(
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    IconButton(onPressed: () {}, icon: Icon(Icons.call)),
+                    IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Messages()),
+                          );
+                        },
+                        icon: Icon(Icons.message_outlined)),
+                  ],
+                ),
+              ],
+            ),
           )
         ],
       ),
@@ -117,6 +127,14 @@ class _DashboardState extends State<Dashboard> {
           height: 15,
         ),
         buildListItem("car"),
+        const SizedBox(
+          height: 15,
+        ),
+        buildListItem("motorcycle"),
+        const SizedBox(
+          height: 15,
+        ),
+        buildListItem("motorcycle"),
         const SizedBox(
           height: 15,
         ),

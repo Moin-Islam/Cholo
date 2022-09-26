@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:cholo/components/components.dart';
 import 'package:sign_button/sign_button.dart';
 
 class Login extends StatefulWidget {
