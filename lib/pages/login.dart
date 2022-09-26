@@ -1,3 +1,4 @@
+import 'package:cholo/pages/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -33,8 +34,15 @@ class _LoginState extends State<Login> {
           focusedBorder: UnderlineInputBorder(
             borderSide: const BorderSide(color: Color(0xffEB5757), width: 2.0),
           ),
+          prefixIcon: Icon(
+            Icons.email,
+            color: Colors.black,
+          ),
           hintText: 'Email',
-          hintStyle: GoogleFonts.poppins(color: Colors.black38,fontSize: 15,fontWeight: FontWeight.normal)),
+          hintStyle: GoogleFonts.poppins(
+              color: Colors.black38,
+              fontSize: 15,
+              fontWeight: FontWeight.normal)),
     );
   }
 
@@ -55,8 +63,11 @@ class _LoginState extends State<Login> {
             Icons.lock,
             color: Colors.black,
           ),
-          hintText: 'password',
-          hintStyle: GoogleFonts.poppins(color: Colors.black38,fontSize: 15,fontWeight: FontWeight.normal)),
+          hintText: 'Password',
+          hintStyle: GoogleFonts.poppins(
+              color: Colors.black38,
+              fontSize: 15,
+              fontWeight: FontWeight.normal)),
     );
   }
 
@@ -65,15 +76,18 @@ class _LoginState extends State<Login> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         TextButton(
-      onPressed: () {},
-      style: TextButton.styleFrom(
-        padding: EdgeInsets.only(right: 0),
-      ),
-      child: Text(
-        'Forgot your Password?',
-        style: GoogleFonts.poppins(color: Colors.black45, fontWeight: FontWeight.normal,fontSize: 15),
-      ),
-    )
+          onPressed: () {},
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.only(right: 0),
+          ),
+          child: Text(
+            'Forgot your Password?',
+            style: GoogleFonts.poppins(
+                color: Colors.black45,
+                fontWeight: FontWeight.normal,
+                fontSize: 15),
+          ),
+        )
       ],
     );
   }
@@ -90,9 +104,14 @@ class _LoginState extends State<Login> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
           primary: Color(0xffEB5757),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Dashboard()),
+          );
+        },
         child: Text(
-          'Let\'s Combat',
+          'Sign In',
           style: GoogleFonts.poppins(
               color: Colors.white, fontSize: 15, fontWeight: FontWeight.normal),
         ),
@@ -104,19 +123,26 @@ class _LoginState extends State<Login> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
-      children: [Text("Welcome Back!",
-      style: GoogleFonts.poppins(
-        color: Color(0xffEB5757),
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-      ),),
-      const SizedBox(height: 10,),
-       Text("Hi, Kindly login to continue",
-      style: GoogleFonts.poppins(
-        fontSize: 15,
-        fontWeight: FontWeight.normal,
-      ),
-      )],
+      children: [
+        Text(
+          "Welcome Back!",
+          style: GoogleFonts.poppins(
+            color: Color(0xffEB5757),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Text(
+          "Hi, Kindly login to continue",
+          style: GoogleFonts.poppins(
+            fontSize: 15,
+            fontWeight: FontWeight.normal,
+          ),
+        )
+      ],
     );
   }
 
@@ -134,7 +160,11 @@ class _LoginState extends State<Login> {
     return Column(
       children: [
         Text("Connect With:"),
+        SizedBox(
+          height: 15,
+        ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SignInButton.mini(
               buttonType: ButtonType.google,
@@ -161,8 +191,8 @@ class _LoginState extends State<Login> {
           ),
           child: Text(
             'Create Account',
-            style:
-                GoogleFonts.poppins(color: Color(0xff4BA7F3), fontWeight: FontWeight.normal),
+            style: GoogleFonts.poppins(
+                color: Color(0xff4BA7F3), fontWeight: FontWeight.normal),
           ),
         ),
       ],
@@ -172,23 +202,58 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width * 0.1, vertical: 30),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            buildCholoImage(),
-            buildWelcomeBack(),
-            buildUserNameStudentCreateAccount(),
-            buildPasswordLogin(),
-            buildForgetPasswordLogin(),
-            buildCombatButton(),
-            buildConnectWith(),
-            buildCreateAccount(),
-          ],
+      body: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width * 0.1,
+              vertical: 30),
+          child: Column(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  buildCholoImage(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  buildWelcomeBack(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  buildUserNameStudentCreateAccount(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  buildPasswordLogin(),
+                  Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        buildForgetPasswordLogin(),
+                      ]),
+                ],
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  buildCombatButton(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  buildConnectWith(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  buildCreateAccount(),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

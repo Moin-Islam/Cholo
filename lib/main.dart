@@ -18,30 +18,31 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-  title: "Cholo",
-  theme: ThemeData(
-    // Define the default brightness and colors.
-    /*brightness: Brightness.dark,*/ 
-    buttonTheme: ButtonThemeData(  
-      buttonColor: Color(0xffEB5757),
-    ),
-    primaryColor: Colors.lightBlue[800],
+      title: "Cholo",
+      theme: ThemeData(
+        // Define the default brightness and colors.
+        /*brightness: Brightness.dark,*/
+        buttonTheme: ButtonThemeData(
+          buttonColor: Color(0xffEB5757),
+        ),
+        primaryColor: Colors.lightBlue[800],
 
-    // Define the default font family.
-    fontFamily: 'Georgia',
+        // Define the default font family.
+        fontFamily: 'Georgia',
 
-    // Define the default `TextTheme`. Use this to specify the default
-    // text styling for headlines, titles, bodies of text, and more.
-    /*textTheme: const TextTheme(
+        // Define the default `TextTheme`. Use this to specify the default
+        // text styling for headlines, titles, bodies of text, and more.
+        /*textTheme: const TextTheme(
       headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
       headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
       bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
     ),*/
-  ),
-  home: const MyHomePage(
-    title: "Cholo",
-  ),
-);
+      ),
+      home: const MyHomePage(
+        title: "Cholo",
+      ),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
 
@@ -79,17 +80,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController mobilenumberControllerSignUp1 = TextEditingController();
+    TextEditingController mobilenumberControllerSignUp1 =
+        TextEditingController();
 
-    final List<String> locationItems =  <String> [
+    final List<String> locationItems = <String>[
       'Select Pickup Point',
-    'Badda',
-    'Rampura',
-    'Gulshan',
-    'Uttara',
-  ];
+      'Badda',
+      'Rampura',
+      'Gulshan',
+      'Uttara',
+    ];
 
-  String? selectedItem = 'Select Pickup Point';
+    String? selectedItem = 'Select Pickup Point';
 
     OtpFieldController otpController = OtpFieldController();
     // This method is rerun every time setState is called, for instance as done
@@ -98,10 +100,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Dashboard();
-    
-      
-       // This trailing comma makes auto-formatting nicer for build methods.
-  
+    return Login();
+
+    // This trailing comma makes auto-formatting nicer for build methods.
   }
 }
