@@ -2,28 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:cholo/pages/login.dart';
 
-class GetStarted extends StatefulWidget {
-  const GetStarted({Key? key}) : super(key: key);
+class Successful extends StatefulWidget {
+  const Successful({Key? key}) : super(key: key);
 
   @override
-  State<GetStarted> createState() => _GetStartedState();
+  State<Successful> createState() => _SuccessfulState();
 }
 
-class _GetStartedState extends State<GetStarted> {
+class _SuccessfulState extends State<Successful> {
 
-  Widget buildCholoImage() {
+
+   Widget buildSuccessfulImage() {
     return SizedBox(
       height: 500,
       width: 400,
       child: Image(
-        image: AssetImage('images/Cholo.png'),
+        image: AssetImage('images/Successful.png'),
       ),
     );
   }
 
-  Widget buildGetStartedButton() {
+   Widget buildGetStartedButton() {
     return SizedBox(
       height: 60,
       width: 300,
@@ -36,13 +36,10 @@ class _GetStartedState extends State<GetStarted> {
           primary: Color(0xffEB5757),
         ),
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const Login()),
-          );
+          
         },
         child: Text(
-          'Get Started',
+          'Let*\'s Combat',
           style: GoogleFonts.poppins(
               color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
         ),
@@ -54,16 +51,23 @@ class _GetStartedState extends State<GetStarted> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container (  
-          padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width * 0.1,
-            vertical: 30
-          ),
+      body: SingleChildScrollView(  
+        padding: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * 0.1,
+          vertical: 100
+        ),
+        child: Container(
           child: Column(
             children: [
-              buildCholoImage(),
-              const SizedBox(height: 10,),
+              buildSuccessfulImage(),
+              SizedBox(height: 20,),
+              Text("You now have full access to our system",
+              style: GoogleFonts.poppins(
+                fontSize: 14,
+                fontWeight: FontWeight.normal,
+                color : Color(0xff333333)
+              ),),
+              SizedBox(height: 20,),
               buildGetStartedButton()
             ],
           ),

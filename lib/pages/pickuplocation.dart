@@ -49,12 +49,12 @@ class _PickupLocationState extends State<PickupLocation> {
         Text(
           "Enter Your Location",
           style: GoogleFonts.poppins(
-              fontWeight: FontWeight.normal,
+              fontWeight: FontWeight.bold,
               fontSize: 17,
               color: Color(0xffEB5757)),
         ),
         const SizedBox(
-          height: 10,
+          height: 20,
         ),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -126,11 +126,11 @@ class _PickupLocationState extends State<PickupLocation> {
           "Enter Your Class Time",
           style: GoogleFonts.poppins(
               fontSize: 17,
-              fontWeight: FontWeight.normal,
+              fontWeight: FontWeight.bold,
               color: Color(0xffEB5757)),
         ),
         const SizedBox(
-          height: 10,
+          height: 20,
         ),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -190,9 +190,9 @@ class _PickupLocationState extends State<PickupLocation> {
             ),
             onPressed: () {
               Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const Dashboard()),
-          );
+                context,
+                MaterialPageRoute(builder: (context) => const Dashboard()),
+              );
             },
             child: Text(
               'Back',
@@ -238,16 +238,29 @@ class _PickupLocationState extends State<PickupLocation> {
         child: Container(
           width: double.infinity,
           padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * 0.1, vertical: 30),
+              horizontal: MediaQuery.of(context).size.width * 0.1,
+              vertical: 100),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-             
-              buildSelectLocation(),
-               buildMapImage(),
-              // buildDetectLocationButton(),
-              buildEnterClassTime(),
+              Column(
+                children: [
+                  buildSelectLocation(),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  buildMapImage(),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  // buildDetectLocationButton(),
+                  buildEnterClassTime(),
+                ],
+              ),
+              const SizedBox(
+                    height: 80,
+                  ),
               buildBottomButtons(),
             ],
           ),

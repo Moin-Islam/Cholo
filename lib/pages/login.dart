@@ -100,7 +100,7 @@ class _LoginState extends State<Login> {
           elevation: 5,
           padding: EdgeInsets.all(20),
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
           primary: Color(0xffEB5757),
         ),
         onPressed: () {

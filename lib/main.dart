@@ -1,9 +1,13 @@
+import 'package:cholo/pages/createAccountDriver.dart';
+import 'package:cholo/pages/createAccountStudent.dart';
 import 'package:cholo/pages/dashboard.dart';
 import 'package:cholo/pages/getstarted.dart';
 import 'package:cholo/pages/login.dart';
+import 'package:cholo/pages/otp.dart';
+import 'package:cholo/pages/paymentmethod.dart';
 import 'package:cholo/pages/pickuplocation.dart';
+import 'package:cholo/pages/successful.dart';
 import 'package:flutter/material.dart';
-import 'package:cholo/components/components.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -102,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return GetStarted();
+    return Successful();
 
     // This trailing comma makes auto-formatting nicer for build methods.
   }

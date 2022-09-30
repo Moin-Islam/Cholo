@@ -4,6 +4,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cholo/pages/messages.dart';
+import 'package:cholo/pages/login.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -155,10 +156,15 @@ class _DashboardState extends State<Dashboard> {
               elevation: 5,
               padding: EdgeInsets.all(20),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0)),
+                  borderRadius: BorderRadius.circular(30.0)),
               primary: Color(0xffEB5757),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Login()),
+              );
+            },
             child: Text(
               'Back',
               style: GoogleFonts.rubik(
@@ -176,7 +182,7 @@ class _DashboardState extends State<Dashboard> {
               elevation: 5,
               padding: EdgeInsets.all(20),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0)),
+                  borderRadius: BorderRadius.circular(30.0)),
               primary: Color(0xffEB5757),
             ),
             onPressed: () {
