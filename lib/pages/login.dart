@@ -1,4 +1,6 @@
+import 'package:cholo/pages/createAccountDriver.dart';
 import 'package:cholo/pages/dashboard.dart';
+import 'package:cholo/pages/pickuplocation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -19,7 +21,7 @@ class _LoginState extends State<Login> {
   Widget buildUserNameStudentCreateAccount() {
     return TextFormField(
       controller: usernameControllerStudent,
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.emailAddress,
       style: TextStyle(
         color: Colors.black,
       ),
@@ -106,7 +108,7 @@ class _LoginState extends State<Login> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Dashboard()),
+            MaterialPageRoute(builder: (context) => const PickupLocation()),
           );
         },
         child: Text(
@@ -184,7 +186,13 @@ class _LoginState extends State<Login> {
       children: [
         Text("Don't have an Account?"),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const CreateAccountDriver()),
+            );
+          },
           style: TextButton.styleFrom(
             padding: EdgeInsets.only(right: 0),
           ),

@@ -1,3 +1,4 @@
+import 'package:cholo/pages/otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -13,7 +14,6 @@ class CreateAccountDriver extends StatefulWidget {
 }
 
 class _CreateAccountDriverState extends State<CreateAccountDriver> {
-
   TextEditingController studentIDControllerDriver = TextEditingController();
   TextEditingController usernameControllerDriver = TextEditingController();
   TextEditingController mobilenumberControllerDriver = TextEditingController();
@@ -34,7 +34,9 @@ class _CreateAccountDriverState extends State<CreateAccountDriver> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(),
-        const SizedBox(width: 60,),
+        const SizedBox(
+          width: 60,
+        ),
         SizedBox(
           height: 200,
           width: 200,
@@ -96,7 +98,7 @@ class _CreateAccountDriverState extends State<CreateAccountDriver> {
   Widget buildUserNameStudentCreateAccount() {
     return TextFormField(
       controller: usernameControllerDriver,
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.text,
       style: TextStyle(
         color: Colors.black,
       ),
@@ -121,7 +123,7 @@ class _CreateAccountDriverState extends State<CreateAccountDriver> {
   Widget buildMobileNumberStudentCreateAccount() {
     return TextFormField(
       controller: mobilenumberControllerDriver,
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.phone,
       style: TextStyle(
         color: Colors.black,
       ),
@@ -146,7 +148,7 @@ class _CreateAccountDriverState extends State<CreateAccountDriver> {
   Widget buildEmailStudentCreateAccount() {
     return TextFormField(
       controller: emailControllerDriver,
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.emailAddress,
       style: TextStyle(
         color: Colors.black,
       ),
@@ -212,8 +214,8 @@ class _CreateAccountDriverState extends State<CreateAccountDriver> {
 
   Widget buildBloodGroupStudentCreateAccount() {
     return TextFormField(
-      controller: emailControllerDriver,
-      keyboardType: TextInputType.number,
+      controller: bloodgroupControllerDriver,
+      keyboardType: TextInputType.text,
       style: TextStyle(
         color: Colors.black,
       ),
@@ -264,7 +266,7 @@ class _CreateAccountDriverState extends State<CreateAccountDriver> {
   Widget FilePickTextButton() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start  ,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         TextButton(
             onPressed: () {
@@ -284,18 +286,21 @@ class _CreateAccountDriverState extends State<CreateAccountDriver> {
     );
   }
 
-  Widget buildTermsAndCondition () {
+  Widget buildTermsAndCondition() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(),
-        SizedBox(width: 20,),
-        Text("By tapping the button below, you agree to\nCholo's terms of Use and acknowledge that\nyou have read the Privacy Policy",
-        style: GoogleFonts.roboto(
-          fontSize: 15,
-          fontWeight: FontWeight.normal,
-          color: Color(0xff999999)
-        ),)
+        SizedBox(
+          width: 20,
+        ),
+        Text(
+          "By tapping the button below, you agree to\nCholo's terms of Use and acknowledge that\nyou have read the Privacy Policy",
+          style: GoogleFonts.roboto(
+              fontSize: 15,
+              fontWeight: FontWeight.normal,
+              color: Color(0xff999999)),
+        )
       ],
     );
   }
@@ -312,7 +317,12 @@ class _CreateAccountDriverState extends State<CreateAccountDriver> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
           primary: Color(0xffEB5757),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const OtpConfirmation()),
+          );
+        },
         child: Text(
           'Create Account',
           style: GoogleFonts.rubik(
@@ -321,6 +331,7 @@ class _CreateAccountDriverState extends State<CreateAccountDriver> {
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -344,11 +355,15 @@ class _CreateAccountDriverState extends State<CreateAccountDriver> {
               buildBloodGroupStudentCreateAccount(),
               FilePickTextButton(),
               buildTermsAndCondition(),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Row(
                 children: [
                   Container(),
-                  SizedBox(width: 60,),
+                  SizedBox(
+                    width: 60,
+                  ),
                   buildCreateAccountButton()
                 ],
               )
@@ -357,6 +372,5 @@ class _CreateAccountDriverState extends State<CreateAccountDriver> {
         ),
       ),
     );
-    
   }
 }

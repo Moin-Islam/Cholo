@@ -1,3 +1,4 @@
+import 'package:cholo/pages/successful.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -13,34 +14,27 @@ class OtpConfirmation extends StatefulWidget {
 }
 
 class _OtpConfirmationState extends State<OtpConfirmation> {
-
-
   Widget buildTopText() {
     return RichText(
       text: TextSpan(
-        text: "Enter the 4-digit code sent to you at \n ",
-        style: GoogleFonts.poppins(
-          fontSize: 17,
-          fontWeight: FontWeight.normal,
-          color: Colors.black
-        ),
-        children: <TextSpan> [
-          TextSpan(
-            text: '+880 1711 256987',
-            style: GoogleFonts.poppins(
-              fontSize: 17,
-              fontWeight: FontWeight.normal,
-              color: Color(0xffEB5757)
-            )
-          )
-        ]
-      ),
+          text: "Enter the 4-digit code sent to you at \n ",
+          style: GoogleFonts.poppins(
+              fontSize: 17, fontWeight: FontWeight.normal, color: Colors.black),
+          children: <TextSpan>[
+            TextSpan(
+                text: '+880 1711 256987',
+                style: GoogleFonts.poppins(
+                    fontSize: 17,
+                    fontWeight: FontWeight.normal,
+                    color: Color(0xffEB5757)))
+          ]),
       maxLines: 2,
     );
   }
-   OtpFieldController otpController = OtpFieldController();
 
-  Widget buildOtp () {
+  OtpFieldController otpController = OtpFieldController();
+
+  Widget buildOtp() {
     return OTPTextField(
         controller: otpController,
         length: 4,
@@ -70,7 +64,7 @@ class _OtpConfirmationState extends State<OtpConfirmation> {
     );
   }
 
-   Widget buildNextButton() {
+  Widget buildNextButton() {
     return SizedBox(
       height: 60,
       width: 200,
@@ -82,7 +76,12 @@ class _OtpConfirmationState extends State<OtpConfirmation> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
           primary: Color(0xffEB5757),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Successful()),
+          );
+        },
         child: Text(
           'Next',
           style: GoogleFonts.rubik(
@@ -93,8 +92,7 @@ class _OtpConfirmationState extends State<OtpConfirmation> {
   }
 
   Widget buildBackButton() {
-    return IconButton(onPressed:() =>  {},
-    icon: Icon(Icons.arrow_back));
+    return IconButton(onPressed: () => {}, icon: Icon(Icons.arrow_back));
   }
 
   @override
@@ -107,26 +105,35 @@ class _OtpConfirmationState extends State<OtpConfirmation> {
               horizontal: MediaQuery.of(context).size.width * 0.1,
               vertical: 100),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              buildBackButton(),
-              SizedBox(height: 10,),
-              buildTopText(),
-              SizedBox(height: 20,),
-              buildOtp(),
-              SizedBox(height: 10,),
-              buildResendCode(),
-              SizedBox(height: 200,),
-              Row(
-                children: [
-                  Container(),
-                  SizedBox(width: 60,),
-                  buildNextButton(),
-                ],
-              )
-          ]
-          ),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                buildBackButton(),
+                SizedBox(
+                  height: 10,
+                ),
+                buildTopText(),
+                SizedBox(
+                  height: 20,
+                ),
+                buildOtp(),
+                SizedBox(
+                  height: 10,
+                ),
+                buildResendCode(),
+                SizedBox(
+                  height: 200,
+                ),
+                Row(
+                  children: [
+                    Container(),
+                    SizedBox(
+                      width: 60,
+                    ),
+                    buildNextButton(),
+                  ],
+                )
+              ]),
         ),
       ),
     );

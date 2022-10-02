@@ -88,7 +88,7 @@ class _ComponentState extends State<Component> {
       if (result != null) {
         filename = result!.files.first.name;
         pickedfile = result!.files.first;
-        filetodisplay = File(pickedfile!.path.toString()); 
+        filetodisplay = File(pickedfile!.path.toString());
         print(filename);
       }
 
@@ -111,15 +111,12 @@ class _ComponentState extends State<Component> {
               "Upload Documents",
               style: TextStyle(fontSize: 17),
             )),
-
-            if (pickedfile != null)
-              SizedBox(
-                height: 200,
-                width: 200,
-                child: Image.file(filetodisplay!),
-              ),
-
-            
+        if (pickedfile != null)
+          SizedBox(
+            height: 200,
+            width: 200,
+            child: Image.file(filetodisplay!),
+          ),
       ],
     );
   }

@@ -217,7 +217,12 @@ class _PickupLocationState extends State<PickupLocation> {
                   borderRadius: BorderRadius.circular(15.0)),
               primary: Color(0xffEB5757),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Dashboard()),
+              );
+            },
             child: Text(
               'Next',
               style: GoogleFonts.rubik(
@@ -259,8 +264,8 @@ class _PickupLocationState extends State<PickupLocation> {
                 ],
               ),
               const SizedBox(
-                    height: 80,
-                  ),
+                height: 80,
+              ),
               buildBottomButtons(),
             ],
           ),

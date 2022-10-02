@@ -1,3 +1,4 @@
+import 'package:cholo/pages/paymentmethod.dart';
 import 'package:cholo/pages/pickuplocation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -188,7 +189,7 @@ class _DashboardState extends State<Dashboard> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const PickupLocation()),
+                MaterialPageRoute(builder: (context) => const PaymentMethod()),
               );
             },
             child: Text(
