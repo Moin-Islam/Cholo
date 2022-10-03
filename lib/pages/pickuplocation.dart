@@ -3,6 +3,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cholo/pages/dashboard.dart';
+import 'package:dropdown_textfield/dropdown_textfield.dart';
 
 class PickupLocation extends StatefulWidget {
   const PickupLocation({Key? key}) : super(key: key);
@@ -236,6 +237,43 @@ class _PickupLocationState extends State<PickupLocation> {
     );
   }
 
+ final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  FocusNode searchFocusNode = FocusNode();
+  FocusNode textFieldFocusNode = FocusNode();
+  late SingleValueDropDownController _cnt;
+  late MultiValueDropDownController _cntMulti;
+
+
+  Widget buildDropDownSearch () {
+    return DropDownTextField(
+                controller: _cnt,
+                clearOption: true,
+                enableSearch: true,
+                clearIconProperty: IconProperty(color: Colors.green),
+                searchDecoration: const InputDecoration(
+                  hintText: "Enter your location",
+                ),
+                validator: (value) {
+                  if (value == null) {
+                      return "Required field";
+                  }
+                  else {
+                    return null;
+                  }
+                },
+                dropDownItemCount: 6,
+
+                dropDownList: const [
+                  DropDownValueModel(name: "Dhaka", value: "value1"),
+                  DropDownValueModel(name: "Banasree", value: "value2",toolTipMsg: "Dipto"),
+                  DropDownValueModel(name: "Badda", value: "value3"),
+                  DropDownValueModel(name: "Gulshan", value: "value4"),
+                ],
+                onChanged: (val) {},
+
+              );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -251,7 +289,7 @@ class _PickupLocationState extends State<PickupLocation> {
             children: [
               Column(
                 children: [
-                  buildSelectLocation(),
+                  buildDropDownSearch(),
                   const SizedBox(
                     height: 30,
                   ),
