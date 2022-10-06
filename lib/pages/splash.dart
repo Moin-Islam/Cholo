@@ -16,7 +16,7 @@ class Splash extends StatelessWidget {
       nextScreen: GetStarted(),
       duration: 2000,
       backgroundColor: Color(0xffffffff),
-      splashTransition: SplashTransition.sizeTransition,
-      pageTransitionType: PageTransitionType.rightToLeft,) ;
+      splashTransition: SplashTransition.fadeTransition,
+      pageTransitionType: PageTransitionType.bottomToTop,) ;
   }
 }

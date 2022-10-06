@@ -100,7 +100,7 @@ class _LoginState extends State<Login> {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 5,
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(8),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
           primary: Color(0xffEB5757),
@@ -160,7 +160,7 @@ class _LoginState extends State<Login> {
   Widget buildConnectWith() {
     return Column(
       children: [
-        Text("Connect With:"),
+        Text("Connect With:" ),
         SizedBox(
           height: 15,
         ),
@@ -223,7 +223,7 @@ class _LoginState extends State<Login> {
                 children: [
                   buildCholoImage(),
                   SizedBox(
-                    height: 30,
+                    height: 10,
                   ),
                   buildWelcomeBack(),
                   SizedBox(

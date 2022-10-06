@@ -339,7 +339,7 @@ class _CreateAccountDriverState extends State<CreateAccountDriver> {
         child: Container(
           padding: EdgeInsets.symmetric(
               horizontal: MediaQuery.of(context).size.width * 0.1,
-              vertical: 100),
+              vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

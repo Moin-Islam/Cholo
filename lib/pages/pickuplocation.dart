@@ -29,6 +29,42 @@ class _PickupLocationState extends State<PickupLocation> {
     '1:00 PM',
   ];
 
+  var locations = {
+    "Badda": ["Link-Road", "Uttar Badda"],
+    "Mohammadpur": [
+      "Mohammadpur Bus Stand",
+      "Town Hall",
+      "Sir Sayed Road",
+      "Tajmahal Road",
+      "Nurjahan Road"
+    ],
+    "Gulshan": ["Gulshan 1", "Gulshan 2"]
+  };
+
+  var charge = {
+    "Badda": [
+      {"area": "Link Road", "price": 150, "distance": 3.5},
+      {"area": "Uttar Badda", "price": 100, "distance": 1.5}
+    ],
+    "Mohammadpur": [
+      {"area": "Mohammadpur Bus Stand", "price": 250, "distance": 14},
+      {"area": "Town Hall", "price": 250, "distance": 14},
+      {"area": "Sir Sayed Road", "price": 230, "distance": 13.5},
+      {"area": "Tajmahal Road", "price": 250, "distance": 14.3},
+      {"area": "Nurjahan Road", "price": 220, "distance": 14.1},
+    ],
+    "Gulshan": [
+      {"area": "Gulshan 1", "price": 250, "distance": 14},
+      {"area": "Gulshan 2", "price": 250, "distance": 14},
+    ],
+  };
+
+  var area_location = ["Link-Road", "Uttar Badda"];
+
+  String selectedArea = "";
+  String selectedSubArea = "";
+  String totalDistance = "";
+  String totalCharge = "";
   String? selectedItem = 'Select Your Location';
 
   String? selectedClassItem = 'Enter Your Class Time';
@@ -237,33 +273,83 @@ class _PickupLocationState extends State<PickupLocation> {
     );
   }
 
- /*final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  /*final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   FocusNode searchFocusNode = FocusNode();
   FocusNode textFieldFocusNode = FocusNode();
   late SingleValueDropDownController _cnt;
   late MultiValueDropDownController _cntMulti;*/
 
-
-  Widget buildDropDownSearch () { 
+  Widget buildDropDownSearch() {
     return DropdownSearch(
-      items: ["Badda","Rampura","Dhanmondi","Mirpur","Gulistan","Motijheel","Gulshan","Hatirjheel"],
+      items: ["Badda", "Mohammadpur", "Gulshan"],
       popupProps: PopupProps.menu(
-        showSearchBox: true,
-
-        showSelectedItems: true,
-        disabledItemFn: (String s) => s.startsWith("I")
-      ),
+          showSearchBox: true,
+          showSelectedItems: true,
+          disabledItemFn: (String s) => s.startsWith("I")),
       dropdownDecoratorProps: DropDownDecoratorProps(
         dropdownSearchDecoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(  
-            borderSide: BorderSide(color :Color(0xffEB5757),width: 2.0 )
-          ),
-          labelText: "Select Location",
-          hintText: "Select suitable pickup location"
-        ),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xffEB5757), width: 2.0)),
+            labelText: "Select Location",
+            hintText: "Select suitable pickup location"),
       ),
-      onChanged: print,
+      onChanged: (value) {
+        setState(() {
+          selectedArea = value.toString();
+        });
+
+        setState(() {
+          area_location = locations[value]!;
+        });
+
+        setState(() {
+            totalCharge = "";
+          });
+
+          setState(() {
+            totalDistance = "";
+          });
+      },
       selectedItem: "Badda",
+    );
+  }
+
+  Widget buildNestedDropDownSearch() {
+    return DropdownSearch(
+      items: area_location,
+      popupProps: PopupProps.menu(
+          showSearchBox: true,
+          showSelectedItems: true,
+          disabledItemFn: (String s) => s.startsWith("I")),
+      dropdownDecoratorProps: DropDownDecoratorProps(
+        dropdownSearchDecoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xffEB5757), width: 2.0)),
+            labelText: "Select Location",
+            hintText: "Select suitable pickup location"),
+      ),
+      onChanged: (value) {
+        setState(() {
+          selectedSubArea = value.toString();
+        });
+
+        print(selectedArea);
+        print(charge[selectedArea]);
+
+        List temp = charge[selectedArea]!;
+
+        for (var i = 0; i < temp.length; i++) {
+          // TO DO
+          setState(() {
+            totalCharge = temp[i]["price"].toString();
+          });
+
+          setState(() {
+            totalDistance = temp[i]["distance"].toString();
+          });
+        }
+      },
+      selectedItem: area_location[0],
     );
   }
 
@@ -286,6 +372,27 @@ class _PickupLocationState extends State<PickupLocation> {
                   const SizedBox(
                     height: 30,
                   ),
+
+                  buildNestedDropDownSearch(),
+                  SizedBox(
+                    height: 15,
+                  ),
+
+                  Text(
+                    totalDistance == "" ? "" : "Total Distance: " + totalDistance + " km",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+
+                  Text(
+                    totalCharge == "" ? "" : "Total Charge: " + totalCharge + " BDT",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
                   buildMapImage(),
                   const SizedBox(
                     height: 30,
@@ -294,7 +401,7 @@ class _PickupLocationState extends State<PickupLocation> {
                 ],
               ),
               const SizedBox(
-                height: 80,
+                height: 20,
               ),
               buildBottomButtons(),
             ],

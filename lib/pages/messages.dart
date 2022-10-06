@@ -65,6 +65,7 @@ class _MessagesState extends State<Messages> {
             itemBuilder: (context, Message message) => Align(
               alignment: message.isSentByMe ? Alignment.centerRight : Alignment.centerLeft,
               child: Card(
+                color: message.isSentByMe ?   Colors.white:Color.fromARGB(255, 199, 137, 137),
                 elevation: 8,
                 child: Padding (  
                   padding: const EdgeInsets.all(12),
@@ -74,7 +75,7 @@ class _MessagesState extends State<Messages> {
             ),
           )),
           Container(
-            color: Colors.grey,
+            color: Color.fromARGB(255, 221, 220, 220),
             child: TextField(
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.all(12),

@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.lightBlue[800],
 
         // Define the default font family.
-        fontFamily: 'Georgia',
+        fontFamily: GoogleFonts.poppins(color: Color(0xff4BA7F3), fontWeight: FontWeight.normal).fontFamily
 
         // Define the default `TextTheme`. Use this to specify the default
         // text styling for headlines, titles, bodies of text, and more.

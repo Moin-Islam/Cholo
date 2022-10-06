@@ -50,49 +50,57 @@ class _DashboardState extends State<Dashboard> {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Icon(
-                  vehical == "car" ? Icons.car_repair : Icons.motorcycle,
-                  size: 30,
-                ),
-                Column(
-                  children: [
-                    Text(
-                      "161611454",
-                      style: GoogleFonts.poppins(
-                          fontSize: 15,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      "Mr. X",
-                      style: GoogleFonts.poppins(
-                          fontSize: 15,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black),
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    IconButton(onPressed: () {}, icon: Icon(Icons.call)),
-                    IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Messages()),
-                          );
-                        },
-                        icon: Icon(Icons.message_outlined)),
-                  ],
-                ),
-              ],
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PaymentMethod()),
+              );
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(
+                    vehical == "car" ? Icons.car_repair : Icons.motorcycle,
+                    size: 30,
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        "161611454",
+                        style: GoogleFonts.poppins(
+                            fontSize: 15,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.black),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "Mr. X",
+                        style: GoogleFonts.poppins(
+                            fontSize: 15,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.black),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      IconButton(onPressed: () {}, icon: Icon(Icons.call)),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Messages()),
+                            );
+                          },
+                          icon: Icon(Icons.message_outlined)),
+                    ],
+                  ),
+                ],
+              ),
             ),
           )
         ],

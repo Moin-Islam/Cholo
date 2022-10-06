@@ -1,17 +1,18 @@
 import 'package:cholo/pages/login.dart';
+import 'package:cholo/pages/pickuplocation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Successful extends StatefulWidget {
-  const Successful({Key? key}) : super(key: key);
+class PaymentSuccessful extends StatefulWidget {
+  const PaymentSuccessful({Key? key}) : super(key: key);
 
   @override
-  State<Successful> createState() => _SuccessfulState();
+  State<PaymentSuccessful> createState() => _SuccessfulState();
 }
 
-class _SuccessfulState extends State<Successful> {
+class _SuccessfulState extends State<PaymentSuccessful> {
   Widget buildSuccessfulImage() {
     return SizedBox(
       height: 500,
@@ -37,11 +38,11 @@ class _SuccessfulState extends State<Successful> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Login()),
+            MaterialPageRoute(builder: (context) => const PickupLocation()),
           );
         },
         child: Text(
-          'Sign In',
+          'Go Again!',
           style: GoogleFonts.poppins(
               color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
         ),
@@ -60,7 +61,7 @@ class _SuccessfulState extends State<Successful> {
               height: 20,
             ),
             Text(
-              "You now have full access to our system",
+              "Successfully Paid the Bill",
               style: GoogleFonts.poppins(
                   fontSize: 14,
                   fontWeight: FontWeight.normal,

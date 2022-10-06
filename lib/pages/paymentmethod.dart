@@ -1,3 +1,4 @@
+import 'package:cholo/pages/paymentsuccessful.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -23,7 +24,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
   Widget buildbKashPaymentBtn() {
     return GestureDetector(
       onTap: () {
-        print("Tapped");
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const PaymentSuccessful()),
+          );
       },
       child: Container(
           width: MediaQuery.of(context).size.width * 0.9,
@@ -47,72 +51,97 @@ class _PaymentMethodState extends State<PaymentMethod> {
   }
 
   Widget buildnagadPaymentBtn() {
-    return Container(
-        width: MediaQuery.of(context).size.width * 0.9,
-        child: Row(
-          children: [
-            Image.asset(
-              "images/nagad.png",
-              height: 60,
-              width: 60,
-            ),
-            Text(
-              'Nagad',
-              style: GoogleFonts.rubik(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.normal),
-            )
-          ],
-        ));
+
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const PaymentSuccessful()),
+          );
+      },
+      child: Container(
+          width: MediaQuery.of(context).size.width * 0.9,
+          child: Row(
+            children: [
+              Image.asset(
+                "images/nagad.png",
+                height: 60,
+                width: 60,
+              ),
+              Text(
+                'Nagad',
+                style: GoogleFonts.rubik(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal),
+              )
+            ],
+          )),
+    );
   }
 
   Widget buildCreditCardPaymentBtn() {
-    return Container(
-        width: MediaQuery.of(context).size.width * 0.9,
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Image.asset(
-                "images/creditcard.png",
-                height: 40,
-                width: 40,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const PaymentSuccessful()),
+          );
+      },
+      child: Container(
+          width: MediaQuery.of(context).size.width * 0.9,
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Image.asset(
+                  "images/creditcard.png",
+                  height: 40,
+                  width: 40,
+                ),
               ),
-            ),
-            Text(
-              'Credit or Decit Card (SSL)',
-              style: GoogleFonts.rubik(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.normal),
-            )
-          ],
-        ));
+              Text(
+                'Credit or Decit Card (SSL)',
+                style: GoogleFonts.rubik(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal),
+              )
+            ],
+          )),
+    );
   }
 
   Widget buildCashPaymentBtn() {
-    return Container(
-        width: MediaQuery.of(context).size.width * 0.9,
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Image.asset(
-                "images/cash.png",
-                height: 40,
-                width: 40,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const PaymentSuccessful()),
+          );
+      },
+      child: Container(
+          width: MediaQuery.of(context).size.width * 0.9,
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Image.asset(
+                  "images/cash.png",
+                  height: 40,
+                  width: 40,
+                ),
               ),
-            ),
-            Text(
-              'Cash',
-              style: GoogleFonts.rubik(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.normal),
-            )
-          ],
-        ));
+              Text(
+                'Cash',
+                style: GoogleFonts.rubik(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal),
+              )
+            ],
+          )),
+    );
   }
 
   @override
