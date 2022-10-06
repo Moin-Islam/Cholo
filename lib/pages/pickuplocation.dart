@@ -3,7 +3,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cholo/pages/dashboard.dart';
-import 'package:dropdown_textfield/dropdown_textfield.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 
 class PickupLocation extends StatefulWidget {
   const PickupLocation({Key? key}) : super(key: key);
@@ -237,41 +237,34 @@ class _PickupLocationState extends State<PickupLocation> {
     );
   }
 
- final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+ /*final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   FocusNode searchFocusNode = FocusNode();
   FocusNode textFieldFocusNode = FocusNode();
   late SingleValueDropDownController _cnt;
-  late MultiValueDropDownController _cntMulti;
+  late MultiValueDropDownController _cntMulti;*/
 
 
-  Widget buildDropDownSearch () {
-    return DropDownTextField(
-                controller: _cnt,
-                clearOption: true,
-                enableSearch: true,
-                clearIconProperty: IconProperty(color: Colors.green),
-                searchDecoration: const InputDecoration(
-                  hintText: "Enter your location",
-                ),
-                validator: (value) {
-                  if (value == null) {
-                      return "Required field";
-                  }
-                  else {
-                    return null;
-                  }
-                },
-                dropDownItemCount: 6,
+  Widget buildDropDownSearch () { 
+    return DropdownSearch(
+      items: ["Badda","Rampura","Dhanmondi","Mirpur","Gulistan","Motijheel","Gulshan","Hatirjheel"],
+      popupProps: PopupProps.menu(
+        showSearchBox: true,
 
-                dropDownList: const [
-                  DropDownValueModel(name: "Dhaka", value: "value1"),
-                  DropDownValueModel(name: "Banasree", value: "value2",toolTipMsg: "Dipto"),
-                  DropDownValueModel(name: "Badda", value: "value3"),
-                  DropDownValueModel(name: "Gulshan", value: "value4"),
-                ],
-                onChanged: (val) {},
-
-              );
+        showSelectedItems: true,
+        disabledItemFn: (String s) => s.startsWith("I")
+      ),
+      dropdownDecoratorProps: DropDownDecoratorProps(
+        dropdownSearchDecoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(  
+            borderSide: BorderSide(color :Color(0xffEB5757),width: 2.0 )
+          ),
+          labelText: "Select Location",
+          hintText: "Select suitable pickup location"
+        ),
+      ),
+      onChanged: print,
+      selectedItem: "Badda",
+    );
   }
 
   @override
@@ -298,7 +291,6 @@ class _PickupLocationState extends State<PickupLocation> {
                     height: 30,
                   ),
                   // buildDetectLocationButton(),
-                  buildEnterClassTime(),
                 ],
               ),
               const SizedBox(
