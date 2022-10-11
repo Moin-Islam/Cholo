@@ -1,3 +1,4 @@
+import 'package:cholo/pages/accountsettings.dart';
 import 'package:cholo/pages/createAccountDriver.dart';
 import 'package:cholo/pages/createAccountStudent.dart';
 import 'package:cholo/pages/dashboard.dart';
@@ -108,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Splash();
+    return AccountSetting();
 
     // This trailing comma makes auto-formatting nicer for build methods.
   }
