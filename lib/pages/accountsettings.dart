@@ -319,7 +319,7 @@ class _AccountSettingState extends State<AccountSetting> {
         child: Container(
           padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width *0.1,
-            vertical: 10
+            vertical: 20
           ),
           child: Column(
               children: [

@@ -215,12 +215,12 @@ class _PickupLocationState extends State<PickupLocation> {
     return Row(
       children: [
         SizedBox(
-          height: 60,
-          width: 100,
+          height: 50,
+          width: 80,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               elevation: 5,
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(5),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0)),
               primary: Color(0xffEB5757),
@@ -241,15 +241,15 @@ class _PickupLocationState extends State<PickupLocation> {
           ),
         ),
         const SizedBox(
-          width: 110,
+          width: 150,
         ),
         SizedBox(
-          height: 60,
-          width: 100,
+          height: 50,
+          width: 80,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               elevation: 5,
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(5),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0)),
               primary: Color(0xffEB5757),

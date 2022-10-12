@@ -158,14 +158,14 @@ class _DashboardState extends State<Dashboard> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SizedBox(
-          height: 60,
-          width: 100,
+          height: 50,
+          width: 80,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               elevation: 5,
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(5),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0)),
+                  borderRadius: BorderRadius.circular(15.0)),
               primary: Color(0xffEB5757),
             ),
             onPressed: () {
@@ -184,14 +184,14 @@ class _DashboardState extends State<Dashboard> {
           ),
         ),
         SizedBox(
-          height: 60,
-          width: 100,
+          height: 50,
+          width: 80,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               elevation: 5,
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(5),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0)),
+                  borderRadius: BorderRadius.circular(15.0)),
               primary: Color(0xffEB5757),
             ),
             onPressed: () {
