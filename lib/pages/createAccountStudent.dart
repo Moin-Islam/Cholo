@@ -30,12 +30,10 @@ class _CreateAccountStudentState extends State<CreateAccountStudent> {
 
   Widget buildCholoImage() {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(),
-        const SizedBox(width: 60,),
         SizedBox(
-          height: 200,
+          height: 100,
           width: 200,
           child: Image(
             image: AssetImage('images/Cholo.png'),
@@ -324,6 +322,13 @@ class _CreateAccountStudentState extends State<CreateAccountStudent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+      shadowColor: Colors.black,
+      foregroundColor: Color(0xff1f0112),
+      leading: BackButton(),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+    ),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(

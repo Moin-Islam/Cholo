@@ -147,6 +147,13 @@ class _PaymentMethodState extends State<PaymentMethod> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+      shadowColor: Colors.black,
+      foregroundColor: Color(0xff1f0112),
+      leading: BackButton(),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+    ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width * 0.1, vertical: 100),

@@ -1,3 +1,4 @@
+import 'package:cholo/pages/accountsettings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -30,40 +31,41 @@ class _PickupLocationState extends State<PickupLocation> {
   ];
 
   var locations = {
-    "Badda": ["Link-Road", "Uttar Badda"],
+    "Badda": ["Select sub zone","Link-Road", "Uttar Badda"],
     "Mohammadpur": [
+      "Select sub zone",
       "Mohammadpur Bus Stand",
       "Town Hall",
       "Sir Sayed Road",
       "Tajmahal Road",
       "Nurjahan Road"
     ],
-    "Gulshan": ["Gulshan 1", "Gulshan 2"]
+    "Gulshan": ["Select sub zone","Gulshan 1", "Gulshan 2"]
   };
 
   var charge = {
     "Badda": [
-      {"area": "Link Road", "price": 150, "distance": 3.5},
-      {"area": "Uttar Badda", "price": 100, "distance": 1.5}
+      {"area": "Link Road", "price": 150, "distance": 3.5,"car" : 350},
+      {"area": "Uttar Badda", "price": 100, "distance": 1.5,"car" : 350}
     ],
     "Mohammadpur": [
-      {"area": "Mohammadpur Bus Stand", "price": 250, "distance": 14},
-      {"area": "Town Hall", "price": 250, "distance": 14},
-      {"area": "Sir Sayed Road", "price": 230, "distance": 13.5},
-      {"area": "Tajmahal Road", "price": 250, "distance": 14.3},
-      {"area": "Nurjahan Road", "price": 220, "distance": 14.1},
+      {"area": "Mohammadpur Bus Stand", "price": 250, "distance": 14,"car" : 350},
+      {"area": "Town Hall", "price": 250, "distance": 14, "car" : 350},
+      {"area": "Sir Sayed Road", "price": 230, "distance": 13.5, "car" : 350},
+      {"area": "Tajmahal Road", "price": 250, "distance": 14.3, "car" : 350},
+      {"area": "Nurjahan Road", "price": 220, "distance": 14.1, "car" : 350},
     ],
     "Gulshan": [
-      {"area": "Gulshan 1", "price": 250, "distance": 14},
-      {"area": "Gulshan 2", "price": 250, "distance": 14},
+      {"area": "Gulshan 1", "price": 250, "distance": 14,"car" : 350},
+      {"area": "Gulshan 2", "price": 250, "distance": 14, "car" : 350}
     ],
   };
 
-  var area_location = ["Link-Road", "Uttar Badda"];
+  var area_location = ["Select sub zone","Link-Road", "Uttar Badda"];
 
   String selectedArea = "";
   String selectedSubArea = "";
-  String totalDistance = "";
+  String totalCarPrice = "";
   String totalCharge = "";
   String? selectedItem = 'Select Your Location';
 
@@ -213,36 +215,9 @@ class _PickupLocationState extends State<PickupLocation> {
 
   Widget buildBottomButtons() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        SizedBox(
-          height: 50,
-          width: 80,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              elevation: 5,
-              padding: EdgeInsets.all(5),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0)),
-              primary: Color(0xffEB5757),
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Dashboard()),
-              );
-            },
-            child: Text(
-              'Back',
-              style: GoogleFonts.rubik(
-                  color: Colors.white,
-                  fontSize: 17,
-                  fontWeight: FontWeight.normal),
-            ),
-          ),
-        ),
-        const SizedBox(
-          width: 150,
-        ),
+        
         SizedBox(
           height: 50,
           width: 80,
@@ -281,7 +256,7 @@ class _PickupLocationState extends State<PickupLocation> {
 
   Widget buildDropDownSearch() {
     return DropdownSearch(
-      items: ["Badda", "Mohammadpur", "Gulshan"],
+      items: ["Select your pickup location","Badda", "Mohammadpur", "Gulshan"],
       popupProps: PopupProps.menu(
           showSearchBox: true,
           showSelectedItems: true,
@@ -307,10 +282,10 @@ class _PickupLocationState extends State<PickupLocation> {
           });
 
           setState(() {
-            totalDistance = "";
+            totalCarPrice = "";
           });
       },
-      selectedItem: "Badda",
+      selectedItem: "Select your pickup location",
     );
   }
 
@@ -345,7 +320,7 @@ class _PickupLocationState extends State<PickupLocation> {
           });
 
           setState(() {
-            totalDistance = temp[i]["distance"].toString();
+            totalCarPrice = temp[i]["car"].toString();
           });
         }
       },
@@ -356,6 +331,22 @@ class _PickupLocationState extends State<PickupLocation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+      shadowColor: Colors.black,
+      foregroundColor: Color(0xff1f0112),
+      leading: BackButton(),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      actions: [
+        IconButton(onPressed : (() {
+          Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AccountSetting()),
+              );
+        }),
+         icon: Icon(Icons.settings),)
+      ],
+    ),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -377,18 +368,18 @@ class _PickupLocationState extends State<PickupLocation> {
                   SizedBox(
                     height: 15,
                   ),
-
-                  Text(
-                    totalDistance == "" ? "" : "Total Distance: " + totalDistance + " km",
-                    style: TextStyle(fontSize: 14),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                    totalCarPrice == "" ? "" : "Car Charge: " + totalCarPrice + " BDT",
+                    style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
-                    height: 15,
-                  ),
-
                   Text(
-                    totalCharge == "" ? "" : "Total Charge: " + totalCharge + " BDT",
-                    style: TextStyle(fontSize: 14),
+                    totalCharge == "" ? "" : "Bike Charge: " + totalCharge + " BDT",
+                    style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),
+                  ),
+                    ],
                   ),
                   SizedBox(
                     height: 30,

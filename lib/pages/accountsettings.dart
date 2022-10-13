@@ -315,6 +315,13 @@ class _AccountSettingState extends State<AccountSetting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+      shadowColor: Colors.black,
+      foregroundColor: Color(0xff1f0112),
+      leading: BackButton(),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+    ),
       body: SingleChildScrollView(  
         child: Container(
           padding: EdgeInsets.symmetric(

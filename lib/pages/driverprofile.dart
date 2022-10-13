@@ -1,5 +1,7 @@
 import 'package:cholo/components/profile_widget.dart';
 import 'package:cholo/components/user_preferences.dart';
+import 'package:cholo/pages/accountsettings.dart';
+import 'package:cholo/pages/paymentmethod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -230,11 +232,61 @@ class _DriverProfileState extends State<DriverProfile> {
   
   }
 
+  Widget buildBottomButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 50,
+          width: 200,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              elevation: 5,
+              padding: EdgeInsets.all(5),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0)),
+              primary: Color(0xffEB5757),
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PaymentMethod()),
+              );
+            },
+            child: Text(
+              'Take The Ride',
+              style: GoogleFonts.rubik(
+                  color: Colors.white,
+                  fontSize: 17,
+                  fontWeight: FontWeight.normal),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
     final user = UserPreferences.myUser;
     return Scaffold(
+      appBar: AppBar(
+      shadowColor: Colors.black,
+      foregroundColor: Color(0xff1f0112),
+      leading: BackButton(),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      actions: [
+        IconButton(onPressed : (() {
+          Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AccountSetting()),
+              );
+        }),
+         icon: Icon(Icons.settings),)
+      ],
+    ),
       body: SingleChildScrollView(
         child: Container(  
           padding: EdgeInsets.symmetric(
@@ -253,7 +305,9 @@ class _DriverProfileState extends State<DriverProfile> {
                 const SizedBox(height: 24,),
                 NumbersWidget(),
                 const SizedBox(height: 24,),
-                buildReview(user)
+                buildReview(user),
+                const SizedBox(height: 70,),
+                buildBottomButtons()
               ],
           ),
         ),

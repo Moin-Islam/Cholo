@@ -1,3 +1,5 @@
+import 'package:cholo/pages/accountsettings.dart';
+import 'package:cholo/pages/driverprofile.dart';
 import 'package:cholo/pages/paymentmethod.dart';
 import 'package:cholo/pages/pickuplocation.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +46,7 @@ class _DashboardState extends State<Dashboard> {
   Widget buildListItem(String vehical) {
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(width: 2, color: Colors.red),
+          border: Border.all(width: 2, color: Color(0xff1f0112)),
           borderRadius: BorderRadius.circular(5)),
       child: Column(
         children: [
@@ -54,7 +56,7 @@ class _DashboardState extends State<Dashboard> {
               onTap: () {
                 Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const PaymentMethod()),
+                MaterialPageRoute(builder: (context) => const DriverProfile()),
               );
               },
               child: Row(
@@ -155,34 +157,9 @@ class _DashboardState extends State<Dashboard> {
 
   Widget buildBottomButtons() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        SizedBox(
-          height: 50,
-          width: 80,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              elevation: 5,
-              padding: EdgeInsets.all(5),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0)),
-              primary: Color(0xffEB5757),
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Login()),
-              );
-            },
-            child: Text(
-              'Back',
-              style: GoogleFonts.rubik(
-                  color: Colors.white,
-                  fontSize: 17,
-                  fontWeight: FontWeight.normal),
-            ),
-          ),
-        ),
+        
         SizedBox(
           height: 50,
           width: 80,
@@ -216,6 +193,22 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+      shadowColor: Colors.black,
+      foregroundColor: Color(0xff1f0112),
+      leading: BackButton(),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      actions: [
+        IconButton(onPressed : (() {
+          Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AccountSetting()),
+              );
+        }),
+         icon: Icon(Icons.settings),)
+      ],
+    ),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(

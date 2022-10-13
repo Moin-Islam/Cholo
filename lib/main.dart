@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+    
       title: "Cholo",
       theme: ThemeData(
         // Define the default brightness and colors.
@@ -110,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return DriverProfile();
+    return Splash();
 
     // This trailing comma makes auto-formatting nicer for build methods.
   }
