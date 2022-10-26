@@ -245,7 +245,7 @@ class _DriverProfileState extends State<DriverProfile> {
               padding: EdgeInsets.all(5),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0)),
-              primary: Color(0xffEB5757),
+              primary: Color(0xffFA0C20) ,
             ),
             onPressed: () {
               Navigator.push(
@@ -278,13 +278,6 @@ class _DriverProfileState extends State<DriverProfile> {
       backgroundColor: Colors.transparent,
       elevation: 0,
       actions: [
-        IconButton(onPressed : (() {
-          Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AccountSetting()),
-              );
-        }),
-         icon: Icon(Icons.settings),)
       ],
     ),
       body: SingleChildScrollView(

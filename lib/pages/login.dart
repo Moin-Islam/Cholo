@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:sign_button/sign_button.dart';
 
 class Login extends StatefulWidget {
@@ -103,12 +104,12 @@ class _LoginState extends State<Login> {
           padding: EdgeInsets.all(8),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-          primary: Color(0xffEB5757),
+          primary: Color(0xffFA0C20),
         ),
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const PickupLocation()),
+            PageTransition(child: PickupLocation(), type: PageTransitionType.rightToLeft, duration: Duration(milliseconds: 300))
           );
         },
         child: Text(
@@ -128,7 +129,7 @@ class _LoginState extends State<Login> {
         Text(
           "Welcome Back!",
           style: GoogleFonts.poppins(
-            color: Color(0xffEB5757),
+            color: Color(0xffFA0C20),
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),

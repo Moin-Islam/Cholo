@@ -26,7 +26,7 @@ class _OtpConfirmationState extends State<OtpConfirmation> {
                 style: GoogleFonts.poppins(
                     fontSize: 17,
                     fontWeight: FontWeight.normal,
-                    color: Color(0xffEB5757)))
+                    color: Color(0xffFA0C20)))
           ]),
       maxLines: 2,
     );
@@ -59,7 +59,7 @@ class _OtpConfirmationState extends State<OtpConfirmation> {
       ),
       child: Text(
         'Resend Code',
-        style: TextStyle(color: Color(0xffEB5757), fontWeight: FontWeight.bold),
+        style: TextStyle(color: Color(0xffFA0C20), fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -74,7 +74,7 @@ class _OtpConfirmationState extends State<OtpConfirmation> {
           padding: EdgeInsets.all(20),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-          primary: Color(0xffEB5757),
+          primary: Color(0xffFA0C20),
         ),
         onPressed: () {
           Navigator.push(

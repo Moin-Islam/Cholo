@@ -4,6 +4,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 class PaymentMethod extends StatefulWidget {
   const PaymentMethod({Key? key}) : super(key: key);
@@ -24,9 +25,9 @@ class _PaymentMethodState extends State<PaymentMethod> {
   Widget buildbKashPaymentBtn() {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
+       Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const PaymentSuccessful()),
+            PageTransition(child: PaymentSuccessful(), type: PageTransitionType.rightToLeft, duration: Duration(milliseconds: 300))
           );
       },
       child: Container(

@@ -53,14 +53,14 @@ class _CreateAccountDriverState extends State<CreateAccountDriver> {
           style: GoogleFonts.poppins(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Color(0xffEB5757)),
+              color: Color(0xffFA0C20)),
         ),
         Text(
           "Fill in the form to proceed",
           style: GoogleFonts.poppins(
               fontSize: 18,
               fontWeight: FontWeight.normal,
-              color: Color(0xffEB5757)),
+              color: Color(0xffFA0C20)),
         ),
       ],
     );
@@ -311,7 +311,7 @@ class _CreateAccountDriverState extends State<CreateAccountDriver> {
           padding: EdgeInsets.all(20),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-          primary: Color(0xffEB5757),
+          primary: Color(0xffFA0C20),
         ),
         onPressed: () {
           Navigator.push(

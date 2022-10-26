@@ -1,3 +1,4 @@
+import 'package:cholo/components/token_preference.dart';
 import 'package:cholo/pages/accountsettings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -5,6 +6,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cholo/pages/dashboard.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PickupLocation extends StatefulWidget {
   const PickupLocation({Key? key}) : super(key: key);
@@ -14,6 +17,7 @@ class PickupLocation extends StatefulWidget {
 }
 
 class _PickupLocationState extends State<PickupLocation> {
+  final List<String> rideOption = <String>['Select vehicle', 'Car', 'Bike'];
   final List<String> locationItems = <String>[
     'Select Your Location',
     'Badda',
@@ -31,7 +35,7 @@ class _PickupLocationState extends State<PickupLocation> {
   ];
 
   var locations = {
-    "Badda": ["Select sub zone","Link-Road", "Uttar Badda"],
+    "Badda": ["Select sub zone", "Link-Road", "Uttar Badda"],
     "Mohammadpur": [
       "Select sub zone",
       "Mohammadpur Bus Stand",
@@ -40,28 +44,35 @@ class _PickupLocationState extends State<PickupLocation> {
       "Tajmahal Road",
       "Nurjahan Road"
     ],
-    "Gulshan": ["Select sub zone","Gulshan 1", "Gulshan 2"]
+    "Gulshan": ["Select sub zone", "Gulshan 1", "Gulshan 2"]
   };
 
   var charge = {
     "Badda": [
-      {"area": "Link Road", "price": 150, "distance": 3.5,"car" : 350},
-      {"area": "Uttar Badda", "price": 100, "distance": 1.5,"car" : 350}
+      {"area": "Link Road", "Bike": 150, "distance": 3.5, "Car": 350},
+      {"area": "Uttar Badda", "Bike": 100, "distance": 1.5, "Car": 350}
     ],
     "Mohammadpur": [
-      {"area": "Mohammadpur Bus Stand", "price": 250, "distance": 14,"car" : 350},
-      {"area": "Town Hall", "price": 250, "distance": 14, "car" : 350},
-      {"area": "Sir Sayed Road", "price": 230, "distance": 13.5, "car" : 350},
-      {"area": "Tajmahal Road", "price": 250, "distance": 14.3, "car" : 350},
-      {"area": "Nurjahan Road", "price": 220, "distance": 14.1, "car" : 350},
+      {
+        "area": "Mohammadpur Bus Stand",
+        "Bike": 250,
+        "distance": 14,
+        "Car": 350
+      },
+      {"area": "Town Hall", "Bike": 250, "distance": 14, "Car": 350},
+      {"area": "Sir Sayed Road", "Bike": 230, "distance": 13.5, "Car": 350},
+      {"area": "Tajmahal Road", "Bike": 250, "distance": 14.3, "Car": 350},
+      {"area": "Nurjahan Road", "Bike": 220, "distance": 14.1, "Car": 350},
     ],
     "Gulshan": [
-      {"area": "Gulshan 1", "price": 250, "distance": 14,"car" : 350},
-      {"area": "Gulshan 2", "price": 250, "distance": 14, "car" : 350}
+      {"area": "Gulshan 1", "Bike": 250, "distance": 14, "Car": 350},
+      {"area": "Gulshan 2", "Bike": 250, "distance": 14, "Car": 350}
     ],
   };
 
-  var area_location = ["Select sub zone","Link-Road", "Uttar Badda"];
+  var area_location = ["Select sub zone", "Link-Road", "Uttar Badda"];
+
+  String selectVehicle = "";
 
   String selectedArea = "";
   String selectedSubArea = "";
@@ -157,59 +168,27 @@ class _PickupLocationState extends State<PickupLocation> {
     );
   }
 
-  Widget buildEnterClassTime() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Enter Your Class Time",
-          style: GoogleFonts.poppins(
-              fontSize: 17,
-              fontWeight: FontWeight.bold,
-              color: Color(0xffEB5757)),
+  Widget buildDetectBtn() {
+    return SizedBox(
+      height: 50,
+      width: MediaQuery.of(context).size.width * 0.75,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          elevation: 5,
+          padding: EdgeInsets.all(5),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+          primary: Color(0xffFA0C20),
         ),
-        const SizedBox(
-          height: 20,
+        onPressed: () {
+          
+        },
+        child: Text(
+          'Auto Detect Location',
+          style: GoogleFonts.rubik(
+              color: Colors.white, fontSize: 17, fontWeight: FontWeight.normal),
         ),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Color(0xffEB5757),
-          ),
-          child: DropdownButton<String>(
-            isExpanded: true,
-            value: selectedClassItem,
-            icon: const Icon(
-              Icons.arrow_downward,
-              color: Colors.white,
-            ),
-            underline: Container(
-              height: 1,
-              color: Color(0xffEB5757),
-            ),
-            elevation: 16,
-            dropdownColor: Color(0xffEB5757),
-            style: const TextStyle(color: Colors.white),
-            onChanged: (String? value) {
-              // This is called when the user selects an item.
-              setState(() {
-                selectedClassItem = value!;
-              });
-            },
-            items: classTimeItems.map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Center(
-                    child: Text(
-                  value,
-                  textAlign: TextAlign.center,
-                )),
-              );
-            }).toList(),
-          ),
-        )
-      ],
+      ),
     );
   }
 
@@ -217,7 +196,6 @@ class _PickupLocationState extends State<PickupLocation> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        
         SizedBox(
           height: 50,
           width: 80,
@@ -227,13 +205,13 @@ class _PickupLocationState extends State<PickupLocation> {
               padding: EdgeInsets.all(5),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0)),
-              primary: Color(0xffEB5757),
+              primary: Color(0xffFA0C20),
             ),
             onPressed: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Dashboard()),
-              );
+            context,
+            PageTransition(child: Dashboard(), type: PageTransitionType.rightToLeft, duration: Duration(milliseconds: 300))
+          );
             },
             child: Text(
               'Next',
@@ -256,7 +234,7 @@ class _PickupLocationState extends State<PickupLocation> {
 
   Widget buildDropDownSearch() {
     return DropdownSearch(
-      items: ["Select your pickup location","Badda", "Mohammadpur", "Gulshan"],
+      items: ["Select your pickup location", "Badda", "Mohammadpur", "Gulshan"],
       popupProps: PopupProps.menu(
           showSearchBox: true,
           showSelectedItems: true,
@@ -264,7 +242,7 @@ class _PickupLocationState extends State<PickupLocation> {
       dropdownDecoratorProps: DropDownDecoratorProps(
         dropdownSearchDecoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Color(0xffEB5757), width: 2.0)),
+                borderSide: BorderSide(color: Color(0xffFA0C20), width: 2.0)),
             labelText: "Select Location",
             hintText: "Select suitable pickup location"),
       ),
@@ -278,14 +256,49 @@ class _PickupLocationState extends State<PickupLocation> {
         });
 
         setState(() {
-            totalCharge = "";
-          });
+          totalCharge = "";
+        });
 
-          setState(() {
-            totalCarPrice = "";
-          });
+        setState(() {
+          totalCarPrice = "";
+        });
       },
       selectedItem: "Select your pickup location",
+    );
+  }
+
+  Widget buildRideSelect() {
+    return DropdownSearch(
+      items: ['Select vehicle', 'Car', 'Bike'],
+      popupProps: PopupProps.menu(
+          showSearchBox: true,
+          showSelectedItems: true,
+          disabledItemFn: (String s) => s.startsWith("I")),
+      dropdownDecoratorProps: DropDownDecoratorProps(
+        dropdownSearchDecoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Color(0xffFA0C20), width: 2.0)),
+          labelText: "Select Vehicle",
+        ),
+      ),
+      onChanged: (value) {
+        setState(() {
+          selectVehicle = value.toString();
+        });
+
+        List temp = charge[selectedArea]!;
+
+        for (var i = 0; i < temp.length; i++) {
+          // TO DO
+          setState(() {
+            totalCharge = temp[i][selectVehicle].toString();
+          });
+
+          TokenPreference.saveAddress("price", totalCharge);
+          TokenPreference.saveAddress("vehicle", selectVehicle);
+        }
+      },
+      selectedItem: "Select vehicle",
     );
   }
 
@@ -299,7 +312,7 @@ class _PickupLocationState extends State<PickupLocation> {
       dropdownDecoratorProps: DropDownDecoratorProps(
         dropdownSearchDecoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Color(0xffEB5757), width: 2.0)),
+                borderSide: BorderSide(color: Color(0xffFA0C20), width: 2.0)),
             labelText: "Select Location",
             hintText: "Select suitable pickup location"),
       ),
@@ -307,22 +320,6 @@ class _PickupLocationState extends State<PickupLocation> {
         setState(() {
           selectedSubArea = value.toString();
         });
-
-        print(selectedArea);
-        print(charge[selectedArea]);
-
-        List temp = charge[selectedArea]!;
-
-        for (var i = 0; i < temp.length; i++) {
-          // TO DO
-          setState(() {
-            totalCharge = temp[i]["price"].toString();
-          });
-
-          setState(() {
-            totalCarPrice = temp[i]["car"].toString();
-          });
-        }
       },
       selectedItem: area_location[0],
     );
@@ -332,27 +329,33 @@ class _PickupLocationState extends State<PickupLocation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-      shadowColor: Colors.black,
-      foregroundColor: Color(0xff1f0112),
-      leading: BackButton(),
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      actions: [
-        IconButton(onPressed : (() {
-          Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AccountSetting()),
-              );
-        }),
-         icon: Icon(Icons.settings),)
-      ],
-    ),
+          shadowColor: Colors.black,
+          foregroundColor: Color(0xff1f0112),
+          leading: BackButton(),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          actions: [
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AccountSetting()),
+                );
+              },
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child:
+                    ClipOval(child: Image.asset('images/profilepicture.jpg')),
+              ),
+            )
+          ]),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
           padding: EdgeInsets.symmetric(
               horizontal: MediaQuery.of(context).size.width * 0.1,
-              vertical: 100),
+              vertical: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -361,32 +364,39 @@ class _PickupLocationState extends State<PickupLocation> {
                 children: [
                   buildDropDownSearch(),
                   const SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
 
                   buildNestedDropDownSearch(),
                   SizedBox(
                     height: 15,
                   ),
+                  buildRideSelect(),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                    totalCarPrice == "" ? "" : "Car Charge: " + totalCarPrice + " BDT",
-                    style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    totalCharge == "" ? "" : "Bike Charge: " + totalCharge + " BDT",
-                    style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),
-                  ),
+                        totalCharge == ""
+                            ? ""
+                            : "Charge: " + totalCharge + " BDT",
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 20,
+                  ),
+                  buildDetectBtn(),
+                  SizedBox(
+                    height: 20,
                   ),
                   buildMapImage(),
                   const SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   // buildDetectLocationButton(),
                 ],

@@ -29,72 +29,87 @@ class _MessagesState extends State<Messages> {
     return Scaffold(
       appBar: AppBar(  
         title: const Text('Inbox'),
-        backgroundColor: Color(0xffEB5757) ,
+        backgroundColor: Color(0xffFA0C20) ,
       ),
-      body: Column(
-        children: [
-          Expanded(child: GroupedListView<Message,DateTime> (   
-            padding: const EdgeInsets.all(8),
-            reverse: true,
-            order: GroupedListOrder.DESC,
-            useStickyGroupSeparators: true,
-            floatingHeader: true,
-            elements: messages,
-            groupBy: (message) => DateTime(
-              message.date.year,
-              message.date.month,
-              message.date.day,
-            ),
-            groupHeaderBuilder: (Message message) => SizedBox(
-              height: 40,
-              child: Center(  
-                child: Card(
-                  color: Color(0xffEB5757),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Text(  
-                      DateFormat.yMMMd().format(message.date),
-                      style:  GoogleFonts.poppins(
-
-                      ),
-                    ),
-                    ),
-                ),
-              ),
-            ),
-            itemBuilder: (context, Message message) => Align(
-              alignment: message.isSentByMe ? Alignment.centerRight : Alignment.centerLeft,
-              child: Card(
-                color: message.isSentByMe ?   Colors.white:Color.fromARGB(255, 199, 137, 137),
-                elevation: 8,
-                child: Padding (  
-                  padding: const EdgeInsets.all(12),
-                  child: Text(message.text),
-                ),
-              ),
-            ),
-          )),
-          Container(
-            color: Color.fromARGB(255, 221, 220, 220),
-            child: TextField(
-              decoration: const InputDecoration(
-                contentPadding: EdgeInsets.all(12),
-                hintText: 'Type your messages here..',
-              ),
-              onSubmitted: (text) {
-                final message = Message(  
-                  text: text,
-                  date: DateTime.now(),
-                  isSentByMe: true,
-                );
-
-                setState(() {
-                  messages.add(message);
-                });
-              },
-            ),
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(  
+            image: AssetImage('images/background.jpg'),
+            fit: BoxFit.cover
           )
-        ],
+        ),
+        child: Column(
+          children: [
+            Expanded(child: GroupedListView<Message,DateTime> (   
+              padding: const EdgeInsets.all(8),
+              reverse: true,
+              order: GroupedListOrder.DESC,
+              useStickyGroupSeparators: true,
+              floatingHeader: true,
+              elements: messages,
+              groupBy: (message) => DateTime(
+                message.date.year,
+                message.date.month,
+                message.date.day,
+              ),
+              groupHeaderBuilder: (Message message) => SizedBox(
+                height: 40,
+                child: Center(  
+                  child: Card(
+                    color: Color(0xffEB5757),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text(  
+                        DateFormat.yMMMd().format(message.date),
+                        style:  GoogleFonts.poppins(
+      
+                        ),
+                      ),
+                      ),
+                  ),
+                ),
+              ),
+              itemBuilder: (context, Message message) => Align(
+                alignment: message.isSentByMe ? Alignment.centerRight : Alignment.centerLeft,
+                child: Card(
+                  shape: RoundedRectangleBorder(  
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  color: message.isSentByMe ?   Colors.white:Color(0xffFA0C20),
+                  elevation: 8,
+                  child: Padding (  
+                    padding: const EdgeInsets.all(12),
+                    child: Text(message.text,
+                    style: TextStyle(
+                      color: message.isSentByMe ?   Colors.black:Colors.white
+                    ),),
+                  ),
+                ),
+              ),
+            )),
+            Container(
+              color: Color.fromARGB(255, 221, 220, 220),
+              child: TextField(
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.all(12),
+                  hintText: 'Type your messages here..',
+                ),
+                onSubmitted: (text) {
+                  final message = Message(  
+                    text: text,
+                    date: DateTime.now(),
+                    isSentByMe: true,
+                  );
+      
+                  setState(() {
+                    messages.add(message);
+                  });
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

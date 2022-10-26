@@ -35,7 +35,7 @@ class _AccountSettingState extends State<AccountSetting> {
       child: Card(
         shape: RoundedRectangleBorder(  
           borderRadius: BorderRadius.circular(15),
-          side: new BorderSide(color: Color(0xffEB5757),width: 1.0)
+          side: new BorderSide(color: Color(0xffFA0C20) ,width: 1.0)
         ),
         child: Row(
           children: [
@@ -297,10 +297,10 @@ class _AccountSettingState extends State<AccountSetting> {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 5,
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(5),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-          primary: Color(0xffEB5757),
+          primary: Color(0xffFA0C20) ,
         ),
         onPressed: () {},
         child: Text(

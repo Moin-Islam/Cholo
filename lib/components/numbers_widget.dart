@@ -53,7 +53,7 @@ class NumbersWidget extends StatelessWidget {
           buildButton(context, '4/5','Rating'),
           buildDivider(),
           SizedBox(width: 10,),
-          buildButton(context, '4','Trip Completed'),
+          buildButton(context, 'DHK Metro G 15-0568','Toyota Probox'),
         ],
       ),
     );

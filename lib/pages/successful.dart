@@ -29,10 +29,10 @@ class _SuccessfulState extends State<Successful> {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 5,
-          padding: EdgeInsets.all(15),
+          padding: EdgeInsets.all(5),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-          primary: Color(0xffEB5757),
+          primary: Color(0xffFA0C20),
         ),
         onPressed: () {
           Navigator.push(

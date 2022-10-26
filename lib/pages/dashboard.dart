@@ -1,3 +1,4 @@
+import 'package:cholo/components/token_preference.dart';
 import 'package:cholo/pages/accountsettings.dart';
 import 'package:cholo/pages/driverprofile.dart';
 import 'package:cholo/pages/paymentmethod.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cholo/pages/messages.dart';
 import 'package:cholo/pages/login.dart';
+import 'package:page_transition/page_transition.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -17,6 +19,21 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  String selectedRide = "";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    TokenPreference.fetchAddress("vehicle").then((value) {
+      setState(() {
+        selectedRide = value!;
+      });
+    });
+    print(selectedRide);
+  }
+
   Widget buildTopLocationSection() {
     return Column(
       children: [
@@ -55,15 +72,17 @@ class _DashboardState extends State<Dashboard> {
             child: GestureDetector(
               onTap: () {
                 Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const DriverProfile()),
-              );
+                    context,
+                    PageTransition(
+                        child: DriverProfile(),
+                        type: PageTransitionType.rightToLeft,
+                        duration: Duration(milliseconds: 300)));
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Icon(
-                    vehical == "car" ? Icons.car_repair : Icons.motorcycle,
+                    vehical == "Car" ? Icons.car_repair : Icons.motorcycle,
                     size: 30,
                   ),
                   Column(
@@ -93,10 +112,11 @@ class _DashboardState extends State<Dashboard> {
                       IconButton(
                           onPressed: () {
                             Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Messages()),
-                            );
+                                context,
+                                PageTransition(
+                                    child: Messages(),
+                                    type: PageTransitionType.rightToLeft,
+                                    duration: Duration(milliseconds: 300)));
                           },
                           icon: Icon(Icons.message_outlined)),
                     ],
@@ -121,36 +141,36 @@ class _DashboardState extends State<Dashboard> {
           style: GoogleFonts.poppins(
               fontSize: 17,
               fontWeight: FontWeight.normal,
-              color: Color(0xffEB5757)),
+              color: Color(0xffFA0C20)),
         ),
         const SizedBox(
           height: 30,
         ),
-        buildListItem("car"),
+        buildListItem(selectedRide),
         const SizedBox(
           height: 15,
         ),
-        buildListItem("motorcycle"),
+        buildListItem(selectedRide),
         const SizedBox(
           height: 15,
         ),
-        buildListItem("motorcycle"),
+        buildListItem(selectedRide),
         const SizedBox(
           height: 15,
         ),
-        buildListItem("car"),
+        buildListItem(selectedRide),
         const SizedBox(
           height: 15,
         ),
-        buildListItem("motorcycle"),
+        buildListItem(selectedRide),
         const SizedBox(
           height: 15,
         ),
-        buildListItem("motorcycle"),
+        buildListItem(selectedRide),
         const SizedBox(
           height: 15,
         ),
-        buildListItem("motorcycle"),
+        buildListItem(selectedRide),
       ],
     );
   }
@@ -159,7 +179,6 @@ class _DashboardState extends State<Dashboard> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        
         SizedBox(
           height: 50,
           width: 80,
@@ -169,13 +188,15 @@ class _DashboardState extends State<Dashboard> {
               padding: EdgeInsets.all(5),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0)),
-              primary: Color(0xffEB5757),
+              primary: Color(0xffFA0C20),
             ),
             onPressed: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const PaymentMethod()),
-              );
+                  context,
+                  PageTransition(
+                      child: PaymentMethod(),
+                      type: PageTransitionType.rightToLeft,
+                      duration: Duration(milliseconds: 300)));
             },
             child: Text(
               'Next',
@@ -194,21 +215,26 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-      shadowColor: Colors.black,
-      foregroundColor: Color(0xff1f0112),
-      leading: BackButton(),
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      actions: [
-        IconButton(onPressed : (() {
-          Navigator.push(
+        shadowColor: Colors.black,
+        foregroundColor: Color(0xff1f0112),
+        leading: BackButton(),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const AccountSetting()),
               );
-        }),
-         icon: Icon(Icons.settings),)
-      ],
-    ),
+            },
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: ClipOval(child: Image.asset('images/profilepicture.jpg')),
+            ),
+          )
+        ],
+      ),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(
